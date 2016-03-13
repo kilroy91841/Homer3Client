@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>React Tutorial</title>
+    <!-- Not present in the tutorial. Just for basic styling. -->
+    <link rel="stylesheet" href="css/base.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.15/browser.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.5/marked.min.js"></script>
+  </head>
+  <body>
+    <div id="content"></div>
+    <script type="text/babel">
+      
+      var PlayerList = React.createClass({
+        render: function() {
+          var me = this;
+          var mapFunction = function(players) {
+            if (players) {
+              return players.map(function(p) {
+                return (<Player key={p.player.id} textStyle="full" onPlayerClick={me.props.onPlayerClick} data={p} />);
+              });
+            } else {
+              return;
+            }
+          };
+          var catcher = mapFunction(this.props.catcher);
+          var firstBase = mapFunction(this.props.firstBase);
+          var secondBase = mapFunction(this.props.secondBase);
+          var thirdBase = mapFunction(this.props.thirdBase);
+          var shortstop = mapFunction(this.props.shortstop);
+          var middleInfield = mapFunction(this.props.middleInfield);
+          var cornerInfield = mapFunction(this.props.cornerInfield);
+          var outfield = mapFunction(this.props.outfield);
+          var utility = mapFunction(this.props.utility);
+          var pitcher = mapFunction(this.props.pitcher);
+          var disabledList = mapFunction(this.props.disabledList);
+          return (
+            <div className="playerList">
+              <h3>{this.props.title}</h3>
+              {catcher}
+              {firstBase}
+              {secondBase}
+              {thirdBase}
+              {shortstop}
+              {middleInfield}
+              {cornerInfield}
+              {outfield}
+              {utility}
+              {pitcher}
+              {disabledList}
+            </div>
+          );
+        }
+      });
+
+      var Player = React.createClass({
+        handlePlayerClick: function(e) {
+          this.props.onPlayerClick(this.props.data);
+        },
+        render: function() {
+          var text = this.props.data.player.name;
+          if (this.props.textStyle == 'full') {
+            text += ' ' + this.props.data.currentSeason.salary + ' ' + 
+                this.props.data.currentSeason.fantasyPosition.name;
+          }
+          return (
+            <p onClick={this.handlePlayerClick}>
+              {text}
+            </p>
+          );
+        }
+      });
+
+      var Team = React.createClass({
+        render: function() {
+          if (this.props.team.team) {
+            return (
+                <div>
+                  <h2>{this.props.team.team.name}</h2>
+                  <PlayerList onPlayerClick={this.props.onPlayerClick}
+                              catcher={this.props.team.catcher}
+                              firstBase={this.props.team.firstBase}
+                              secondBase={this.props.team.secondBase}
+                              thirdBase={this.props.team.thirdBase}
+                              shortstop={this.props.team.shortstop}
+                              middleInfield={this.props.team.middleInfield}
+                              cornerInfield={this.props.team.cornerInfield}
+                              outfield={this.props.team.outfield}
+                              utility={this.props.team.utility}
+                              pitcher={this.props.team.pitcher}
+                              disabledList={this.props.team.disabledList}
+                   title="Major Leaguers" />
+                </div>
+              );
+          } else {
+            return (
+                <div />
+              );
+          }
+        }
+      });
+      var TeamLink = React.createClass({
+          linkClicked: function() {
+            this.props.onTeamChange(this.props.teamId);
+          },
+          render: function() {
+            return (
+                <div>
+                  <p onClick={this.linkClicked}>{this.props.name}</p>
+                </div>
+              );
+          }
+      });
+      var Search = React.createClass({
+          getInitialState: function() {
+            return { players: [] };
+          },
+          textChanged: function(e) {
+            if(e.target.value.length == 0) {
+              this.setState({players : [] });
+            } else {
+              $.ajax({
+                url: '/player/search?name=' + e.target.value,
+                dataType: 'json',
+                cache: false,
+                success: function(data) {
+                  this.setState({players: data});
+                }.bind(this),
+                error: function(xhr, status, err) {
+                  console.error(this.props.url, status, err.toString());
+                }.bind(this)
+              });
+            }
+          },
+          render: function() {
+            var me = this;
+            return (
+                <div className="righty">
+                  <h2>Player Search</h2>
+                  <input type="text" onKeyUp={this.textChanged} />
+                  {this.state.players.map(
+                    function(p) {
+                      return ( <Player key={p.player.id} onPlayerClick={me.props.onPlayerClick} data={p} /> );
+                    }
+                  )}
+                </div>
+              );
+          }
+      });
+
+      var PlayerPanel = React.createClass({
+        getHeader: function(property, name) {
+          if (property !== undefined) {
+              return name + ': ';
+          } else {
+            return '';
+          }
+        },
+        render: function() {
+          var teamHeader = this.getHeader(this.props.data.currentSeason.team.name, 'Team');
+          var salaryHeader = this.getHeader(this.props.data.currentSeason.salary, 'Salary');
+          var keeperSeasonHeader = this.getHeader(this.props.data.currentSeason.keeperSeason, 'Keeper Season');
+          var fantasyPositionHeader = this.getHeader(this.props.data.currentSeason.fantasyPosition.name, 'Position');
+          return (
+            <div>
+              <h2>Player</h2>
+              <h3>{this.props.data.player.name}</h3>
+              <p>{teamHeader}{this.props.data.currentSeason.team.name}</p>
+              <p>{salaryHeader}{this.props.data.currentSeason.salary}</p>
+              <p>{keeperSeasonHeader}{this.props.data.currentSeason.keeperSeason}</p>
+              <p>{fantasyPositionHeader}{this.props.data.currentSeason.fantasyPosition.name}</p>
+            </div>
+            )
+        }
+      });
+      var Controls = React.createClass({
+          getInitialState: function() {
+            return { 
+              teams : [], 
+              team: { }, 
+              player: {
+                player: {},
+                currentSeason: {
+                  team: {},
+                  fantasyPosition: {},
+                  keeperTeam: {}
+                }
+              } 
+            }
+          },
+          componentDidMount: function() {
+            $.ajax({
+              url: this.props.url,
+              dataType: 'json',
+              cache: false,
+              success: function(data) {
+                this.setState({teams: data});
+              }.bind(this),
+              error: function(xhr, status, err) {
+                console.error(this.props.url, status, err.toString());
+              }.bind(this)
+            });
+          },
+          handleTeamClick: function(teamId) {
+            $.ajax({
+              url: '/team/' + teamId,
+              dataType: 'json',
+              cache: false,
+              success: function(data) {
+                this.setState({team:data});
+              }.bind(this),
+              error: function(xhr, status, err) {
+                console.error(this.props.url, status, err.toString());
+              }.bind(this)
+            });
+          },
+          handlePlayerClick: function(player) {
+            this.setState({player: player});
+          },
+          render: function() {
+            var me = this;
+            return (
+                <div>
+                  <div className="lefty">
+                    <h2>Teams</h2>
+                  {this.state.teams.map(function(team) {
+                    return (
+                      <TeamLink key={team.id} teamId={team.id} name={team.name} onTeamChange={me.handleTeamClick} />
+                      );
+                  })}
+                  </div>
+                  <div className="lefty">
+                    <Team team={this.state.team} onPlayerClick={me.handlePlayerClick}/>
+                  </div>
+                  <div className="lefty">
+                    <PlayerPanel data={this.state.player}/>
+                  </div>
+                  <Search onPlayerClick={me.handlePlayerClick}/>
+                </div>
+              );
+          }
+      });
+      ReactDOM.render(
+        <Controls url="/team"/>,
+        document.getElementById('content')
+      );
+    </script>
+  </body>
+</html>
