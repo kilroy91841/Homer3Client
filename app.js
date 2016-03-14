@@ -41,7 +41,9 @@ app.use(function(req, res, next) {
 });
 
 var getData = function(path, callback) {
-	http.get(URI + path, function(data) {
+	var url = URI + path;
+	console.log(url);
+	http.get(url, function(data) {
 		var output = '';
 		data.on('data', function(chunk) {
 			output += chunk;
