@@ -5,7 +5,7 @@ exports.config = function(env) {
 		};
 	} else if (env == 'production') {
 		return {
-			url: 'http://52.28.203.70/'
+			url: 'http://52.28.203.70'
 		}
 	} else {
 		return {
