@@ -17,6 +17,10 @@ var bodyParser = require('body-parser');
 var app = express();
 var http = require('http');
 
+var env = process.env.NODE_ENV || 'local';
+var config = require('./config').config(env);
+var URI = config.url;
+
 app.set('port', (process.env.PORT || 3000));
 
 app.use('/', express.static(path.join(__dirname, 'public')));
@@ -35,65 +39,41 @@ app.use(function(req, res, next) {
     next();
 });
 
-app.get('/player', function(req, res) {
-	http.get('http://localhost:1234/player', function(data) {
+var getData = function(path, callback) {
+	http.get(URI + path, function(data) {
 		var output = '';
 		data.on('data', function(chunk) {
 			output += chunk;
 		});
 		data.on('end', function() {
-			res.send(output);
+			callback(output);
 		});
 	}).on('error', function(e) {
 		console.log(e);
+	});
+};
+
+app.get('/player', function(req, res) {
+	getData('/player', function(data) {
+		res.send(data);
 	});
 });
 
 app.get('/team/:id', function(req, res) {
-	var url = 'http://localhost:1234/team/' + req.params.id;
-	console.log(url);
-	http.get(url, function(data) {
-		var output = '';
-		data.on('data', function(chunk) {
-			output += chunk;
-		});
-		data.on('end', function() {
-			res.send(output);
-		});
-	}).on('error', function(e) {
-		console.log(e);
+	getData('/team/' + req.params.id, function(data) {
+		res.send(data);
 	});
 });
 
 app.get('/team', function(req, res) {
-	var url = 'http://localhost:1234/team';
-	console.log(url);
-	http.get(url, function(data) {
-		var output = '';
-		data.on('data', function(chunk) {
-			output += chunk;
-		});
-		data.on('end', function() {
-			res.send(output);
-		});
-	}).on('error', function(e) {
-		console.log(e);
+	getData('/team', function(data) {
+		res.send(data);
 	});
 });
 
 app.get('/player/search', function(req, res) {
-	var url = 'http://localhost:1234/player/search?name=' + req.query.name;
-	console.log(url);
-	http.get(url, function(data) {
-		var output = '';
-		data.on('data', function(chunk) {
-			output += chunk;
-		});
-		data.on('end', function() {
-			res.send(output);
-		});
-	}).on('error', function(e) {
-		console.log(e);
+	getData('/player/search?name=' + req.query.name, function(data) {
+		res.send(data);
 	});
 });
 
