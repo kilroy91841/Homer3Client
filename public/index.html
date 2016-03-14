@@ -40,7 +40,7 @@
           var pitcher = mapFunction(this.props.pitcher);
           var disabledList = mapFunction(this.props.disabledList);
           return (
-            <div className="playerList">
+            <div className="lefty">
               <h3>{this.props.title}</h3>
               {catcher}
               {firstBase}
@@ -55,6 +55,21 @@
               {disabledList}
             </div>
           );
+        }
+      });
+
+      var MinorsList = React.createClass({
+        render: function() {
+          var me = this;
+          return (
+            <div className="lefty">
+              <h3>{this.props.title}</h3>
+            {this.props.data.map(function(p) { return ( <Player 
+              key={p.player.id} 
+              data={p}
+              onPlayerClick={me.props.onPlayerClick} />  ); })}
+            </div>
+            );
         }
       });
 
@@ -95,6 +110,8 @@
                               pitcher={this.props.team.pitcher}
                               disabledList={this.props.team.disabledList}
                    title="Major Leaguers" />
+                   <MinorsList title="Minor Leaguers" 
+                   onPlayerClick={this.props.onPlayerClick} data={this.props.team.minorLeaguers} />
                 </div>
               );
           } else {
