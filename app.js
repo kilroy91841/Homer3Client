@@ -20,6 +20,7 @@ var http = require('http');
 var env = process.env.NODE_ENV || 'local';
 var config = require('./config').config(env);
 var URI = config.url;
+console.log(URI);
 
 app.set('port', (process.env.PORT || 3000));
 
