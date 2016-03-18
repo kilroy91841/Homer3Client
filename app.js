@@ -56,6 +56,23 @@ var getData = function(path, callback) {
 	});
 };
 
+var postData = function(path, body, callback) {
+	var url = URI + path;
+	console.log(url);
+	console.log(http);
+	http.post(url, body, function(data) {
+		var output = '';
+			data.on('data', function(chunk) {
+				output += chunk;
+			});
+			data.on('end', function() {
+				callback(output);
+			});
+		}).on('error', function(e) {
+			console.log(e);
+	});
+}
+
 app.get('/player', function(req, res) {
 	getData('/player', function(data) {
 		res.send(data);
@@ -76,6 +93,12 @@ app.get('/team', function(req, res) {
 
 app.get('/player/search', function(req, res) {
 	getData('/player/search?name=' + req.query.name, function(data) {
+		res.send(data);
+	});
+});
+
+app.post('/player/:playerId/team/:newTeamId', function(req, res) {
+	postData('/player/' + req.params.playerId + '/team/' + req.params.newTeamId, req.body, function(data) {
 		res.send(data);
 	});
 });
