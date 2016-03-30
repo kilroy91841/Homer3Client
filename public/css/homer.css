@@ -4,3 +4,6 @@ p.header1 {
 p.header2 {
   font-size: 18px;
 }
+.clickable {
+  cursor: pointer;
+}

@@ -254,7 +254,7 @@
             <p>{fantasyPosition}</p>
           </div>
           <div className="col-md-7">
-            <p>{playerName}</p>
+            <p className="clickable">{playerName}</p>
           </div>
           <div className="col-md-2">
             <p>{salary}</p>
@@ -332,7 +332,7 @@
         return (
             <div className="row">
               <div className="col-md-12">
-                <p onClick={this.linkClicked}>{this.props.name}</p>
+                <p className="clickable" onClick={this.linkClicked}>{this.props.name}</p>
               </div>
             </div>
           );
