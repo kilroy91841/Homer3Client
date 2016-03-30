@@ -272,7 +272,7 @@
               <div>
                 <div className="row">
                   <div className="col-md-12">
-                    <h2>{this.props.team.name}</h2>
+                    <h2>{this.props.team.name}<small> {this.props.team.owner1} {this.props.team.owner2}</small></h2>
                   </div>
                 </div>
                 <div className="row">
