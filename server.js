@@ -9,7 +9,9 @@ const host = require('./config').url;
 const axios = require('axios');
 
 app.use('/', express.static(path.join(__dirname, '')));
-// app.use('*', express.static(path.join(__dirname, '')));
+app.get('/admin', function(req, res) {
+  res.sendFile(path.join(__dirname, 'admin.html'));
+});
 
 app.get('/api/*', function(req, res) {
   var url = host.url + req.path.replace('/api', '');
@@ -21,7 +23,7 @@ app.get('/api/*', function(req, res) {
 });
 
 app.get('/team/:id', function(req, res) {
-  res.redirect('/');
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 var start = function() {
