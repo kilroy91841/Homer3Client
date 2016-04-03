@@ -21,4 +21,4 @@ gulp.task('watch', function() {
 
 gulp.task('default', ['serve:web', 'webpack', 'watch']);
 
-gulp.task('prod', ['server:web', 'webpack']);
+gulp.task('prod', ['serve:web', 'webpack']);
