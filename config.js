@@ -1,16 +1,18 @@
-exports.config = function(env) {
-	if (env == 'local') {
+const isDeveloping = process.env.NODE_ENV !== 'production';
+
+var urlFunc = function() {
+	if (isDeveloping) {
 		return {
 			//url: 'http://localhost:1234'
 			url: 'http://localhost:10080'
 		};
-	} else if (env == 'production') {
+	} else {
 		return {
 			url: 'http://api.homeratthebat.com'
 		}
-	} else {
-		return {
-			url: ''
-		}
 	}
+}
+
+module.exports = {
+	url : urlFunc()
 }
