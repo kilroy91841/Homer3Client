@@ -48,7 +48,7 @@ export default React.createClass({
 
 		document.addEventListener('click', function(e) {
 			var open = "";
-			if ($(e.target).closest(".custom-search").length > 0 && _this.state.searchText.length > 2) {
+			if ($(e.target).closest("." + _this.props.inputClasses).length > 0 && _this.state.searchText.length > 2) {
 				open = "open";
 			}
 			_this.setState( { open: open } );
@@ -64,14 +64,14 @@ export default React.createClass({
 	render: function() {
 		var _this = this;
 		return (
-			<li className={"dropdown navbar-right " + this.state.open}>
-				<form className="navbar-form navbar-right" role="search">
+			<li className={"dropdown " + this.props.liClasses + " " + this.state.open}>
+				<form className={this.props.formClasses} role="search">
 					<div className="form-group">
 						<input onChange={this.onChange} 
-						type="text" className="custom-search form-control" placeholder="Player Search" />
+						type="text" className={"form-control " + this.props.inputClasses } placeholder="Player Search" />
 					</div>
 				</form>
-				<ul className="custom-select dropdown-menu">
+				<ul className="dropdown-menu">
 					{ 
 						this.state.players.map(function(player) {
 							return <PlayerSelect player={player} playerClicked={_this.playerClicked} key={player.id} />

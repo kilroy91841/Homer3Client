@@ -27,7 +27,8 @@ export default React.createClass({
 						<NavDropdown teams={this.props.teams}/>
 					</ul>
 					<ul className="nav navbar-nav navbar-right">
-						<PlayerSearch />
+						<PlayerSearch liClasses={"navbar-right"} formClasses={"navbar-form navbar-right"}
+							inputClasses={"custom-search"}/>
 					</ul>
 				</div>
 				</div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { getFullTeam } from 'api/team';
+import Store from 'store';
 
 //UI
 import PlayerList from 'ui/player-list';
@@ -90,6 +91,15 @@ export default React.createClass({
 
 	componentWillMount: function() {
 		this.getTeam();	
+	},
+
+	componentDidUpdate: function() {
+		Store.dispatch({
+            type: 'PROGRESS_BAR',
+            progressBar: {
+            	percent : 100
+            }
+        });
 	},
 
 	componentWillReceiveProps: function(nextProps) {

@@ -1,5 +1,4 @@
 import React from 'react';
-import store from 'store';
 import { connect } from 'react-redux';
 
 import TeamLink from 'ui/team-link';
@@ -47,9 +46,14 @@ const _PlayerDisplay = React.createClass({
             		<DisplayRow title={"Primary Position"}>
             			<div>{this.props.player.position.name}</div>
             		</DisplayRow>
-            		<DisplayRow title={"Fantasy Position"}>
-            			<div>{this.props.player.currentSeason.fantasyPosition.name}</div>
-            		</DisplayRow>
+                    {
+                        this.props.player.currentSeason.fantasyPosition ?
+                            <DisplayRow title={"Fantasy Position"}>
+                                <div>{this.props.player.currentSeason.fantasyPosition.name}</div>
+                            </DisplayRow>
+                            : 
+                            <div />
+                    }
             	</div>
             </div>
         )

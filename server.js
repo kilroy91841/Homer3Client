@@ -8,14 +8,27 @@ const app = express();
 const host = require('./config').url;
 const axios = require('axios');
 
+var bodyParser = require('body-parser');
+app.use(bodyParser.json()); // for parsing application/json
+
 app.use('/', express.static(path.join(__dirname, '')));
 app.get('/admin', function(req, res) {
-  res.sendFile(path.join(__dirname, 'admin.html'));
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 app.get('/api/*', function(req, res) {
   var url = host.url + req.path.replace('/api', '');
   axios.get(url).then(function(response) {
+    res.send(response.data);
+  }).catch(function(err) {
+    console.error(err);
+  });
+});
+
+app.post('/api', function(req, res) {
+  var url = host.url + req.body.url;
+  var data = req.body.data;
+  axios.post(url, data).then(function(response) {
     res.send(response.data);
   }).catch(function(err) {
     console.error(err);
