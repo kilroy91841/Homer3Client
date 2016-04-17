@@ -15,7 +15,7 @@ export default React.createClass({
 			draftDollarAmount: null,
 			teamData: { minorLeaguePicks: [], draftDollars: [], majorLeaguers: [], minorLeaguers: [] }
 		}
-	},
+	}, 
 	teamFromChange: function(team) {
 		this.setState({teamFrom: team});
 
