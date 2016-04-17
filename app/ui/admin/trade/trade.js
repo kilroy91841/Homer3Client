@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Select from 'react-select';
 import TradeElement from 'ui/admin/trade/tradeElement';
-import TradeElementCreator from 'ui/admin/trade/TradeElementCreator';
+import TradeElementCreator from 'ui/admin/trade/tradeElementCreator';
 
 import { acceptTrade } from 'api/trade';
 
