@@ -15,6 +15,9 @@ app.use('/', express.static(path.join(__dirname, '')));
 app.get('/admin', function(req, res) {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
+app.get('/admin/trade', function(req, res) {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
 
 app.get('/api/*', function(req, res) {
   var url = host.url + req.path.replace('/api', '');

@@ -10,7 +10,8 @@ import App from 'layouts/app';
 // UI
 import Team from 'ui/team';
 import Explainer from 'ui/explainer';
-import Admin from 'ui/admin';
+import Admin from 'ui/admin/admin';
+import Trade from 'ui/admin/trade/trade';
 
 ReactDOM.render((
 	<Provider store={store}>
@@ -19,6 +20,7 @@ ReactDOM.render((
 	        	<Route path="/" component={Explainer} />
 	        	<Route path="/team/:id" component={Team} />
 	        	<Route path="/admin" component={Admin} />
+	        	<Route path="/admin/trade" component={Trade} />
 	        </Route>
 	    </Router>
     </Provider>

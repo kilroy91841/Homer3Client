@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import NavDropdown from 'layouts/nav/dropdown';
 import NavLink from 'layouts/nav/link';
 import PlayerSearch from 'layouts/nav/player-search';
+import store from 'store';
 
 export default React.createClass({
 	getInitialState: function() {
@@ -13,6 +14,14 @@ export default React.createClass({
 	},
 	changeTab: function(clickedTabName) {
 		this.setState( { activeTab : clickedTabName } );
+	},
+	onPlayerClick: function(player) {
+		if (player) {
+			store.dispatch({
+	            type: 'DISPLAY_PLAYER',
+	            player: player
+	        });
+    	}
 	},
 	render: function() {
 		return (
@@ -27,8 +36,9 @@ export default React.createClass({
 						<NavDropdown teams={this.props.teams}/>
 					</ul>
 					<ul className="nav navbar-nav navbar-right">
-						<PlayerSearch liClasses={"navbar-right"} formClasses={"navbar-form navbar-right"}
-							inputClasses={"custom-search"}/>
+						<li className="navbar-right" style={{ paddingTop:"7px"}}>
+							<PlayerSearch classProp={"navbar-right"} onPlayerClick={this.onPlayerClick}/>
+						</li>
 					</ul>
 				</div>
 				</div>
