@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { getTeams } from 'api/team';
+import { getPlayers } from 'api/player';
 import store from 'store';
 import { connect } from 'react-redux';
 import ProgressBar from 'react-progress-bar-plus';
@@ -24,6 +25,14 @@ const App = React.createClass({
             store.dispatch({
                 type: 'GET_TEAMS',
                 teams: response.data
+            });
+        }).catch(function(err) {
+            console.error(err);
+        });
+        getPlayers().then(function(response) {
+            store.dispatch({
+                type: 'GET_PLAYERS',
+                players: response.data
             });
         }).catch(function(err) {
             console.error(err);
