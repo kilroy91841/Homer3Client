@@ -2,6 +2,7 @@ var initialState = {
     player: {},
     teams: [],
     players: [],
+    metadata: {},
     progressBar: {
         percent: -1
     }
@@ -25,6 +26,10 @@ export default function(state = initialState, action) {
         case 'PROGRESS_BAR':
             var newState = Object.assign({}, state);
             newState.progressBar = action.progressBar;
+            return newState;
+        case 'METADATA':
+            var newState = Object.assign({}, state);
+            newState.metadata = action.metadata;
             return newState;
         default:
             return state;

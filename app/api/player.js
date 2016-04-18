@@ -15,14 +15,21 @@ export function switchTeam(player, newTeamId) {
 	});
 };
 
-export function switchPosition(player, newPositionId) {
-	var url = "/player/" + player.id + "/position/" + newPositionId;
+export function switchPosition(player, newPosition) {
+	var url = "/player/" + player.id + "/position/" + newPosition.id;
 	return axios.post('/api', {
 		url: url,
 		data: {
 			season : player.currentSeason.season,
-			fantasyPosition: player.currentSeason.fantasyPosition ? 
-				player.currentSeason.fantasyPosition.id : 0
+			fantasyPosition: player.currentSeason.fantasyPosition
 		}
+	});
+};
+
+export function createPlayer(player) {
+	var url = "/player";
+	return axios.post('/api', {
+		url: url,
+		data: player
 	});
 };

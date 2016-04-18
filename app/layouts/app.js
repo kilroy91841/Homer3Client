@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import { getTeams } from 'api/team';
 import { getPlayers } from 'api/player';
+import { getMetadata } from 'api/api';
 import store from 'store';
 import { connect } from 'react-redux';
 import ProgressBar from 'react-progress-bar-plus';
@@ -37,6 +38,13 @@ const App = React.createClass({
         }).catch(function(err) {
             console.error(err);
         });
+        getMetadata().then(function(response) {
+            store.dispatch({
+                type: 'METADATA',
+                metadata: response.data
+            });
+        });
+
     },
 
     render: function() {

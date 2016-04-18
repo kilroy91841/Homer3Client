@@ -3,6 +3,8 @@ import Select from 'react-select';
 import { getFullTeam } from 'api/team';
 import { getTradeElementText } from 'ui/admin/trade/tradeHelper';
 
+import PlayerSearch from 'ui/player-search';
+
 export default React.createClass({
 	getInitialState: function() {
 		return {
@@ -103,14 +105,10 @@ export default React.createClass({
 									Add Player
 								</div>
 								<div className="col-md-12">
-									<Select 
-										name="player-select"
-										options={this.state.teamData.majorLeaguers.concat(this.state.teamData.minorLeaguers)}
-										labelKey={"name"}
-										valueKey={"id"}
+									<PlayerSearch
+										players={this.state.teamData.majorLeaguers.concat(this.state.teamData.minorLeaguers)}
 										value={this.state.player}
 										onChange={this.playerChange}
-										scrollMenuIntoView={false}
 									/>
 								</div>
 							</div>
