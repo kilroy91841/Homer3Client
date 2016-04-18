@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 
 import NavDropdown from 'layouts/nav/dropdown';
 import NavLink from 'layouts/nav/link';
-import PlayerSearch from 'layouts/nav/player-search';
+import PlayerSearch from 'ui/player-search';
 import store from 'store';
 
 export default React.createClass({
@@ -37,7 +37,7 @@ export default React.createClass({
 					</ul>
 					<ul className="nav navbar-nav navbar-right">
 						<li className="navbar-right" style={{ paddingTop:"7px"}}>
-							<PlayerSearch classProp={"navbar-right"} onPlayerClick={this.onPlayerClick}/>
+							<PlayerSearch classProp={"navbar-right"} onChange={this.onPlayerClick}/>
 						</li>
 					</ul>
 				</div>
