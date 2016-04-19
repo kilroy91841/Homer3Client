@@ -24,7 +24,7 @@ const PlayerSwitchTeam = React.createClass({
 		this.props.teams.map(function(prop) {
 			opts.push(prop);
 		});
-		opts.push( { name : 'Free Agency', id : 1 });
+		opts.push( { name : 'Free Agency', id : 0 });
 		return opts;
 	},
 	doTeamChange: function() {
