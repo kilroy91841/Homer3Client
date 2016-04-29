@@ -28,7 +28,7 @@ const Team = React.createClass({
                     	</div>
 					</div>
 					<div className="row">
-						<div className="col-md-4">
+						<div className="col-md-6">
 							<PlayerList title="Batters" data={
 									[
 										this.props.data.catcher || [],
@@ -55,11 +55,9 @@ const Team = React.createClass({
 									]
 								} 
 							/>
-						</div>
-						<div className="col-md-4">
 							<MinorsList title="Minor Leaguers" data={this.props.data.minorLeaguers || []} />
 						</div>
-						<div className="col-md-4">
+						<div className="col-md-6">
 							<FinancesList title="Finances" data={this.props.data.draftDollars || []} />
 							<PicksList title="Draft Picks" data={this.props.data.minorLeaguePicks || []} />
 						</div>

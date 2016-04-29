@@ -54,6 +54,9 @@ const _PlayerDisplay = React.createClass({
                             : 
                             <div />
                     }
+                    <DisplayRow title={"MLB Status"}>
+                        <div>{this.props.player.currentSeason.mlbStatus.name}</div>
+                    </DisplayRow>
             	</div>
             </div>
         )
