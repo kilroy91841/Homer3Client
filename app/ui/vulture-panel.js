@@ -17,15 +17,24 @@ const VulturePanel = React.createClass({
 	render: function() {
 		return (
 			<div className="row">
-				<div className="col-md-6">
-					<PlayerList 
-						title="Vulturable Players"
-						data= {
-							[
-								this.state.players
-							]
-						}
-					/>
+				<div className="col-md-12">
+					<div className="row">
+						<div className="col-md-12">
+							<h2>Vulturable Players</h2>
+						</div>
+					</div>
+					<div className="row">
+						<div className="col-md-12">
+							<PlayerList 
+								hideTitle={true}
+								data= {
+									[
+										this.state.players
+									]
+								}
+							/>
+						</div>
+					</div>
 				</div>
 			</div>
 		);

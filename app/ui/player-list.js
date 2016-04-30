@@ -12,7 +12,7 @@ const VultureColumn = React.createClass({
 		return (
 			<div className={"col-md-" + this.props.columnSize}>
 				{
-					this.props.vulturable ? <span className="label label-danger">Vulturable</span> : <span />
+					this.props.vulturable ? <span className="label label-danger">Vulturable</span> : null
 				}
 			</div>
 		);
@@ -33,15 +33,20 @@ export default React.createClass({
 		var nameColumnSize = anyVulturable ? defaultNameColumnSize - defaultVultureColumnSize : defaultNameColumnSize;
 		var vultureColumnSize = defaultVultureColumnSize;
 		return (
-			<List title={this.props.title}>
+			<List title={this.props.title} hideTitle={this.props.hideTitle}>
 				<div className="row">
-					<div className="col-md-3">
+					<div className="col-md-2">
 						<i>Pos</i>
 					</div>
-					<div className="col-md-6">
+					<div className={"col-md-" + nameColumnSize}>
 						<i>Name</i>
 					</div>
-					<div className="col-md-3">
+					{
+						anyVulturable ? 
+							<div className={"col-md-" + vultureColumnSize}/> : 
+							null
+					}
+					<div className="col-md-3 text-right">
 						<i>Salary</i>
 					</div>
 				</div>
@@ -62,9 +67,9 @@ export default React.createClass({
 												vulturable={player.currentSeason.vulturable} 
 												columnSize={vultureColumnSize}
 											/> : 
-											<div />
+											null
 									}
-									<div className="col-md-3">
+									<div className="col-md-3 text-right">
 										{player.currentSeason.salary}
 									</div>
 								</PlayerRow>

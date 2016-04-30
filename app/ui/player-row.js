@@ -1,6 +1,8 @@
 import React from 'react';
 import store from 'store';
 
+import Row from 'ui/component/row';
+
 export default React.createClass({
 	playerClicked: function() {
 		store.dispatch({
@@ -11,9 +13,9 @@ export default React.createClass({
 
 	render: function() {
 		return (
-			<div className="row clickable" onClick={this.playerClicked}>
+			<Row onClick={this.playerClicked}>
 				{this.props.children}
-			</div>
+			</Row>
 		)
 	}
 });
