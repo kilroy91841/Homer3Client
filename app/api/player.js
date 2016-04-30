@@ -28,6 +28,14 @@ export function switchPosition(player, newPosition) {
 
 export function createPlayer(player) {
 	var url = "/player";
+	return axios.put('/api', {
+		url: url,
+		data: player
+	});
+};
+
+export function updatePlayer(player) {
+	var url = "/player";
 	return axios.post('/api', {
 		url: url,
 		data: player
