@@ -39,7 +39,7 @@ export default React.createClass({
 							{
 								this.state.teams.map(function(team) {
 									return (
-										<Row clickable="false">
+										<Row key={team.id} clickable="false">
 											<div className="col-md-10">
 												<TeamLink team={team} />
 											</div>
