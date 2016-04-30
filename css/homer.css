@@ -1,3 +1,5 @@
 .clickable {
   cursor: pointer;
 }
+
+.hoverDiv:hover {background: #f5f5f5;}

@@ -1,6 +1,7 @@
 import React from 'react';
 
 import List from 'ui/component/list';
+import Row from 'ui/component/row';
 
 import TeamLink from 'ui/team-link';
 
@@ -38,18 +39,20 @@ const PickRow = React.createClass({
 
 	render: function() {
 		return (
-			<div>
-				<div className="row">
-					<div className="col-md-2">
-						{this.props.data.round}
+			<Row clickable="false">
+				<div className="col-md-12">
+					<div className="row">
+						<div className="col-md-2">
+							{this.props.data.round}
+						</div>
+						<div className="col-md-8">
+							{this.props.data.season}
+						</div>
 					</div>
-					<div className="col-md-8">
-						{this.props.data.season}
-					</div>
+					{this.getSwapTeam()}
+					{this.getOriginalTeam()}
 				</div>
-				{this.getSwapTeam()}
-				{this.getOriginalTeam()}
-			</div>
+			</Row>
 		)
 	}
 });

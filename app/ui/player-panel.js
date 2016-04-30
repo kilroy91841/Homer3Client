@@ -29,6 +29,18 @@ const _PlayerDisplay = React.createClass({
         return (
             <div className="row">
             	<div className="col-md-12">
+                    <div className="row">
+                        <div className="col-md-12">
+                            {
+                                this.props.player.mlbPlayerId ? 
+                                    <img 
+                                        src={"http://mlb.mlb.com/mlb/images/players/head_shot/" + 
+                                            this.props.player.mlbPlayerId + ".jpg"} />
+                                    :
+                                    null
+                            }
+                        </div>
+                    </div>
             		<div className="row">
             			<div className="col-md-12">
             				<h3>{this.props.player.name}</h3>

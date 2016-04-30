@@ -4,6 +4,10 @@ export function getPlayers() {
 	return axios.get('/api/player');
 };
 
+export function getVulturablePlayers() {
+	return axios.get('/api/player/vulturable');
+};
+
 export function switchTeam(player, newTeamId) {
 	var url = "/player/" + player.id + "/team/" + newTeamId;
 	return axios.post('/api', {
