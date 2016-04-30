@@ -9,9 +9,6 @@ const stateToProps = function(state) {
 };
 
 const PositionSelect = React.createClass({
-	onChange: function(val) {
-		this.props.onChange(val);
-	},
 	render: function() {
 		return (
 			<Select
@@ -20,7 +17,7 @@ const PositionSelect = React.createClass({
 				labelKey={"name"}
 				valueKey={"id"}
 				value={this.props.value}
-				onChange={this.onChange}
+				onChange={this.props.onChange}
 				scrollMenuIntoView={false}
 			/>
 		)

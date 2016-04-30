@@ -28,6 +28,16 @@ app.get('/api/*', function(req, res) {
   });
 });
 
+app.put('/api', function(req, res) {
+  var url = host.url + req.body.url;
+  var data = req.body.data;
+  axios.put(url, data).then(function(response) {
+    res.send(response.data);
+  }).catch(function(err) {
+    console.error(err);
+  });
+});
+
 app.post('/api', function(req, res) {
   var url = host.url + req.body.url;
   var data = req.body.data;
