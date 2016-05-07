@@ -28,8 +28,10 @@ const CreatePlayer = React.createClass({
 		this.setState({ position: position });
 	},
 	createPlayer: function() {
-		createPlayer(this.state).then(function(response) {
+		createPlayer(this.state, function(response) {
 			alert(response.data.message);
+		}, function(error) {
+			alert(error.data.message);
 		});
 	},
 	render: function() {

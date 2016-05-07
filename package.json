@@ -14,7 +14,7 @@
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
     "react-redux": "^4.0.6",
-    "react-router": "^2.0.0-rc5",
+    "react-router": "^2.4.0",
     "react-select": "^1.0.0-beta12",
     "react-progress-bar-plus": "^0.2.3",
     "redux": "^3.3.1",

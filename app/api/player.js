@@ -1,47 +1,67 @@
-import axios from 'axios';
+import { get, put, post } from 'api/axios';
 
-export function getPlayers() {
-	return axios.get('/api/player');
+export function getPlayers(success, error) {
+	return get('/api/player', success, error);
 };
 
 export function getVulturablePlayers() {
-	return axios.get('/api/player/vulturable');
+	return get('/api/player/vulturable');
 };
 
-export function switchTeam(player, newTeamId) {
+export function switchTeam(player, newTeamId, success, error) {
 	var url = "/player/" + player.id + "/team/" + newTeamId;
-	return axios.post('/api', {
-		url: url,
-		data: {
-			season : player.currentSeason.season,
-			teamId : player.currentSeason.teamId
-		}
-	});
+	return post(
+		'/api', 
+		{
+			url: url,
+			data: {
+				season : player.currentSeason.season,
+				teamId : player.currentSeason.teamId
+			}
+		},
+		success,
+		error
+	);
 };
 
-export function switchPosition(player, newPosition) {
+export function switchPosition(player, newPosition, success, error) {
 	var url = "/player/" + player.id + "/position/" + newPosition.id;
-	return axios.post('/api', {
-		url: url,
-		data: {
-			season : player.currentSeason.season,
-			fantasyPosition: player.currentSeason.fantasyPosition
-		}
-	});
+	return post(
+		'/api', 
+		{
+			url: url,
+			data: {
+				season : player.currentSeason.season,
+				fantasyPosition: player.currentSeason.fantasyPosition
+			}
+		},
+		success,
+		error
+	);
 };
 
-export function createPlayer(player) {
+export function createPlayer(player, success, error) {
 	var url = "/player";
-	return axios.put('/api', {
-		url: url,
-		data: player
-	});
+	return put(
+		'/api', 
+		{
+			url: url,
+			data: player
+		},
+		success,
+		error
+	);
 };
 
-export function updatePlayer(player) {
+export function updatePlayer(player, success, error) {
 	var url = "/player";
-	return axios.post('/api', {
-		url: url,
-		data: player
-	});
+	return post(
+		'/api', 
+		{
+			url: url,
+			data: player
+		},
+		success,
+		error
+	);
 };

@@ -62,8 +62,10 @@ const UpdatePlayer = React.createClass({
 		playerToUpdate.mlbPlayerId = this.state.newMlbPlayerId;
 		playerToUpdate.position = this.state.newPosition;
 
-		updatePlayer(playerToUpdate).then(function(response) {
+		updatePlayer(playerToUpdate, function(response) {
 			alert(response.data.message);
+		}, function(error) {
+			alert(error.data.message);
 		});
 	},
 	render: function() {

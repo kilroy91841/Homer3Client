@@ -1,5 +1,4 @@
 import React from 'react';
-import store from 'store';
 
 import PlayerRow from 'ui/player-row';
 import List from 'ui/component/list';
@@ -21,6 +20,7 @@ const VultureColumn = React.createClass({
 
 export default React.createClass({
 	render: function() {
+		var self = this;
 		var anyVulturable = 
 			this.props.data
 				.reduce(function(a, b) { 
@@ -54,7 +54,7 @@ export default React.createClass({
 					this.props.data.map(function(playerArray) {
 						return playerArray.map(function(player) {
 							return ( 
-								<PlayerRow key={player.id} player={player}>
+								<PlayerRow onClick={self.props.onClick} key={player.id} player={player}>
 									<div className="col-md-2">
 										{player.currentSeason.fantasyPosition.name}
 									</div>

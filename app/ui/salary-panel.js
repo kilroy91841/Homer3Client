@@ -13,8 +13,10 @@ export default React.createClass({
 	},
 	componentWillMount: function() {
 		var self = this;
-		getSalary().then(function(response) {
+		getSalary(function(response) {
 			self.setState({ teams: response.data.data });
+		}, function(error) {
+			console.log(error);
 		});
 	},
 	render: function() {
