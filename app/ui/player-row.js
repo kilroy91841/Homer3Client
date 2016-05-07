@@ -1,11 +1,15 @@
 import React from 'react';
-import store from 'store';
+import Store from 'store';
 
 import Row from 'ui/component/row';
 
 export default React.createClass({
 	playerClicked: function() {
-		store.dispatch({
+		if (this.props.onClick) {
+			this.props.onClick(this.props.player);
+		}
+		
+		Store.dispatch({
             type: 'DISPLAY_PLAYER',
             player: this.props.player
         });

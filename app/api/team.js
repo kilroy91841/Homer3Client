@@ -1,13 +1,13 @@
-import axios from 'axios';
+import { get, put, post } from 'api/axios';
 
-export function getTeams() {
-	return axios.get('/api/team');
+export function getTeams(success, error) {
+	return get('/api/team', success, error);
 };
 
-export function getFullTeam(id) {
-	return axios.get('/api/team/' + id);
+export function getFullTeam(id, success, error) {
+	return get('/api/team/' + id, success, error);
 };
 
-export function getSalary() {
-	return axios.get('/api/team/salary');
+export function getSalary(success, error) {
+	return get('/api/team/salary', success, error);
 };

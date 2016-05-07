@@ -1,9 +1,9 @@
-import axios from 'axios';
+import { post } from 'api/axios';
 
-export function acceptTrade(trade) {
+export function acceptTrade(trade, success, error) {
 	var url = "/trade";
-	return axios.post('/api', {
+	return post('/api', {
 		url: url,
 		data: trade
-	});
+	}, success, error);
 };

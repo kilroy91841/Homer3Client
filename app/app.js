@@ -12,13 +12,17 @@ import Team from 'ui/team';
 import Home from 'ui/home';
 import Admin from 'ui/admin/admin';
 import Trade from 'ui/admin/trade/trade';
+import Login from 'ui/login';
+import Vulture from 'ui/vulture';
 
 ReactDOM.render((
 	<Provider store={store}>
 	    <Router history={browserHistory}>
 	        <Route component={App}>
 	        	<Route path="/" component={Home} />
+	        	<Route path="/login" component={Login} />
 	        	<Route path="/team/:id" component={Team} />
+	        	<Route path="/vulture" component={Vulture} />
 	        	<Route path="/admin" component={Admin} />
 	        	<Route path="/admin/trade" component={Trade} />
 	        </Route>

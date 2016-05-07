@@ -26,6 +26,7 @@ const VulturePanel = React.createClass({
 					<div className="row">
 						<div className="col-md-12">
 							<PlayerList 
+								onClick={this.props.onPlayerClick}
 								hideTitle={true}
 								data= {
 									[

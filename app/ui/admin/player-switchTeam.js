@@ -28,8 +28,10 @@ const PlayerSwitchTeam = React.createClass({
 		return opts;
 	},
 	doTeamChange: function() {
-		switchTeam(this.state.player, this.state.team.id).then(function(response) {
+		switchTeam(this.state.player, this.state.team.id, function(response) {
 			alert(response.data.message);
+		}, function(error) {
+			alert(error.data.message);
 		});
 	},
 	onTeamChange: function(val) {

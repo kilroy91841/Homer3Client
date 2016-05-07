@@ -14,8 +14,10 @@ const PlayerSwitchPosition = React.createClass({
 		}
 	},
 	doPositionChange: function() {
-		switchPosition(this.state.player, this.state.position).then(function(response) {
+		switchPosition(this.state.player, this.state.position, function(response) {
 			alert(response.data.message);
+		}, function(error) {
+			alert(error.data.message);
 		});
 	},
 	onPositionChange: function(val) {
