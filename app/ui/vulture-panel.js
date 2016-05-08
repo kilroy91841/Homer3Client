@@ -1,5 +1,5 @@
 import React from 'react';
-import { getVulturablePlayers } from 'api/player';
+import { getVulturablePlayers } from 'api/vulture';
 import PlayerList from 'ui/player-list';
 
 const VulturePanel = React.createClass({
@@ -25,15 +25,20 @@ const VulturePanel = React.createClass({
 					</div>
 					<div className="row">
 						<div className="col-md-12">
-							<PlayerList 
-								onClick={this.props.onPlayerClick}
-								hideTitle={true}
-								data= {
-									[
-										this.state.players
-									]
-								}
-							/>
+							{
+								this.state.players && this.state.players.length > 0 ?
+								<PlayerList 
+									onClick={this.props.onPlayerClick}
+									hideTitle={true}
+									data= {
+										[
+											this.state.players
+										]
+									}
+								/>
+								:
+								"There are no vulturable players"
+							}
 						</div>
 					</div>
 				</div>

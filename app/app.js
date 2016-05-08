@@ -13,7 +13,7 @@ import Home from 'ui/home';
 import Admin from 'ui/admin/admin';
 import Trade from 'ui/admin/trade/trade';
 import Login from 'ui/login';
-import Vulture from 'ui/vulture';
+import Vulture from 'ui/pages/vulture/main';
 
 ReactDOM.render((
 	<Provider store={store}>
