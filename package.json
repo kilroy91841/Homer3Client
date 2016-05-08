@@ -26,6 +26,8 @@
     "babel-preset-stage-2": "^6.3.13",
     "express": "^4.13.3",
     "gulp": "^3.9.0",
-    "webpack-stream": "^3.1.0"
+    "webpack-stream": "^3.1.0",
+    "moment-timezone": "^0.5.4",
+    "json-loader": "*"
   }
 }

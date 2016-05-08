@@ -4,10 +4,6 @@ export function getPlayers(success, error) {
 	return get('/api/player', success, error);
 };
 
-export function getVulturablePlayers() {
-	return get('/api/player/vulturable');
-};
-
 export function switchTeam(player, newTeamId, success, error) {
 	var url = "/player/" + player.id + "/team/" + newTeamId;
 	return post(

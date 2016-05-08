@@ -22,11 +22,11 @@ export default React.createClass({
 		this.setState({teamFrom: team});
 
 		var self = this;
-		getFullTeam(team.id).then(function(response) {
+		getFullTeam(team.id, function(response) {
             self.setState({
                 teamData: response.data
             })
-        }).catch(function(err) {
+        }, function(err) {
             console.error(err);
         });
 	},
