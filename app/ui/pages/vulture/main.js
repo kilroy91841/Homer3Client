@@ -50,6 +50,10 @@ const Vulture = React.createClass({
 		this.setState({ isCommissionerVulture: e.target.checked ? "true" : "false" });
 	},
 	submitVulture: function() {
+		if (this.state.player.currentSeason.teamId == teamId()) {
+			alert("Why do you want to vulture a player from your own team? Stop it.");
+			return;	
+		}
 		const self = this;
 		const vultureRequest = {
 			vultureTeamId : teamId(),

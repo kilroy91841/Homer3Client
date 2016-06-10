@@ -10,7 +10,6 @@ const CreateVulture = React.createClass({
 		}
 	},
 	selectPlayer: function(player) {
-		debugger;
 		this.setState( { selectedPlayer : player });
 		this.props.changeDropPlayer(player);
 	},

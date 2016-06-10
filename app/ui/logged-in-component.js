@@ -5,6 +5,7 @@ import { isLoggedIn } from 'auth';
 const LoggedInComponent = React.createClass({
 	componentWillMount: function() {
 		if (!isLoggedIn()) {
+			alert("Please log in to view this page");
 			this.props.router.push("/");
 		}
 	},
