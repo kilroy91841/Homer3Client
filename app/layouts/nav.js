@@ -52,6 +52,11 @@ export default React.createClass({
 							<NavLink changeTab={this.changeTab} active={ this.state.activeTab == "Vulture"} to="/vulture" text="Vulture"/>
 							: null
 						}
+						{
+							loggedIn ?
+							<NavLink changeTab={this.changeTab} active={ this.state.activeTab == "Draft"} to="/minorLeagueDraft" text="Draft"/>
+							: null
+						}
 					</ul>
 					<ul className="nav navbar-nav navbar-right">
 						{ 

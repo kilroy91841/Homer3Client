@@ -14,6 +14,7 @@ import Admin from 'ui/admin/admin';
 import Trade from 'ui/admin/trade/trade';
 import Login from 'ui/login';
 import Vulture from 'ui/pages/vulture/main';
+import MinorLeagueDraft from 'ui/pages/minorLeagueDraft/main';
 
 ReactDOM.render((
 	<Provider store={store}>
@@ -23,6 +24,7 @@ ReactDOM.render((
 	        	<Route path="/login" component={Login} />
 	        	<Route path="/team/:id" component={Team} />
 	        	<Route path="/vulture" component={Vulture} />
+	        	<Route path="/minorLeagueDraft" component={MinorLeagueDraft} />
 	        	<Route path="/admin" component={Admin} />
 	        	<Route path="/admin/trade" component={Trade} />
 	        </Route>

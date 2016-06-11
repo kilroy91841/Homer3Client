@@ -16,6 +16,7 @@
     "react-redux": "^4.0.6",
     "react-router": "^2.4.0",
     "react-select": "^1.0.0-beta12",
+    "react-radio-group": "^2.2.0",
     "react-progress-bar-plus": "^0.2.3",
     "redux": "^3.3.1",
     "redux-thunk": "^1.0.3",

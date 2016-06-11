@@ -16,7 +16,7 @@ const Vulture = React.createClass({
 			player : this.props.location.state ? this.props.location.state.player : undefined,
 			existingVultures: [],
 			dropPlayer : {},
-			players: [],
+			teamPlayers: [],
 			isCommissionerVulture: "false"
 		}
 	},
@@ -31,7 +31,7 @@ const Vulture = React.createClass({
 	componentDidMount: function() {
 		const self = this;
 		getFullTeam(teamId(), function(response) {
-			self.setState({ players : response.data.majorLeaguers })
+			self.setState({ teamPlayers : response.data.majorLeaguers })
 		}, function(error) {
 			console.log(error);
 		});
@@ -91,7 +91,7 @@ const Vulture = React.createClass({
 							this.state.player ?
 							<CreateVulture
 								player={this.state.player}
-								players={this.state.players}
+								players={this.state.teamPlayers}
 								changeDropPlayer={this.changeDropPlayer}
 								setCommissionerVulture={this.setCommissionerVulture}
 								submitVulture={this.submitVulture}

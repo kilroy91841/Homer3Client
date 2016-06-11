@@ -5,7 +5,7 @@ export default React.createClass({
 		var className = "row hoverDiv";
 		className += this.props.clickable != "false" ? " clickable" : "";
 		return (
-			<div className={className} onClick={this.props.onClick}>
+			<div className={className} onClick={this.props.onClick} style={this.props.style}>
 				{this.props.children}
 			</div>
 		);
