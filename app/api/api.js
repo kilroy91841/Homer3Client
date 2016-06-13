@@ -1,4 +1,4 @@
-import { get, getWithParams, postAnonymous } from 'api/axios';
+import { get, getWithParams, postAnonymous, post } from 'api/axios';
 
 export function getMetadata(success, error) {
 	return get('/api/metadata', success, error);
@@ -14,6 +14,17 @@ export function login(userName, password, success, error) {
 				userName: userName,
 				encodedPassword: encodedPassword
 			}
+		},
+		success,
+		error
+	);
+};
+
+export function passwordReset(email, success, error) {
+	return getWithParams(
+		'/api/passwordReset',
+		{
+			email: email
 		},
 		success,
 		error
@@ -37,4 +48,16 @@ export function hasAccess(token, success, error) {
 			error
 		);
 	}
+};
+
+export function updateTeam(team, success, error) {
+	return post(
+		'/api', 
+		{
+			url: "/team",
+			data: team
+		},
+		success,
+		error
+	);
 };

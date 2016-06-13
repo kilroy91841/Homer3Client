@@ -3,8 +3,8 @@ const isDeveloping = process.env.NODE_ENV !== 'production';
 var urlFunc = function() {
 	if (isDeveloping) {
 		return {
-			url: 'http://localhost:1234'
-			//url: 'http://localhost:10080'
+			//url: 'http://localhost:1234'
+			url: 'http://localhost:10080'
 		};
 	} else {
 		return {

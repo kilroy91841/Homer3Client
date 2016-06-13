@@ -60,6 +60,12 @@ export default React.createClass({
 					</ul>
 					<ul className="nav navbar-nav navbar-right">
 						{ 
+							loggedIn ?
+							<NavLink changeTab={this.changeTab} active={ this.state.activeTab == "Profile"} to="/profile" text="Profile"/>
+							: null
+
+						}
+						{ 
 							admin ?
 							<NavLink changeTab={this.changeTab} active={ this.state.activeTab == "Admin"} to="/admin" text="Admin"/>
 							: null

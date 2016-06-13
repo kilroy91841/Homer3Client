@@ -14,7 +14,7 @@ export default React.createClass({
 					{ 
 						this.props.teams.map(function(team) {
 							return (
-								<NavLink key={team.id} to={"/team/" + team.id} text={team.name} />
+								<NavLink key={team.id} to={"/team/" + team.id} text={team.name + " (" + team.owner1 + ")"} />
 							)
 						})
 					}

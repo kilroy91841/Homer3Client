@@ -76,10 +76,10 @@ export default React.createClass({
 	},
 
 	getTeam: function(id) {
-		var _this = this;
+		var self = this;
 		var teamId = id ? id : this.props.params.id;
         getFullTeam(teamId, function(response) {
-            _this.setState({
+            self.setState({
                 team: response.data
             })
         }, function(err) {

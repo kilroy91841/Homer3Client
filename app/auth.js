@@ -10,6 +10,14 @@ export function teamId() {
 	}
 }
 
+export function getUser() {
+	if (isLoggedIn()) {
+		return JSON.parse(localStorage.getItem('user'));
+	} else {
+		return {};
+	}
+}
+
 export function token() {
 	if (isLoggedIn()) {
 		return JSON.parse(localStorage.getItem('user')).token;	

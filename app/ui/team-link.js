@@ -16,7 +16,7 @@ export default React.createClass({
 	render: function() {
 		if (this.props.team) {
 			return (
-				<Link onClick={this.startProgress} to={"/team/" + this.props.team.id}>
+				<Link onClick={this.startProgress} to={"/team/" + this.props.team.id} title={this.props.team.owner1}>
 	            	{this.props.team.name}
 	            </Link>
 			)

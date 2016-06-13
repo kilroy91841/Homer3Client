@@ -11,3 +11,7 @@ export function getFullTeam(id, success, error) {
 export function getSalary(success, error) {
 	return get('/api/team/salary', success, error);
 };
+
+export function getMinorLeaguers(id, success, error) {
+	return get('/api/team/' + id + '/players?onlyMinorLeaguers=true', success, error);
+};

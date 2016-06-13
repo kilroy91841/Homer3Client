@@ -24,6 +24,7 @@ const App = React.createClass({
         var _this = this;
         hasAccess(token(), function(response) {
             if (!response.data.data) {
+                debugger;
                 removeUser();
             }
         }, function(err) {

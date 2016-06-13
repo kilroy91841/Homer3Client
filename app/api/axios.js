@@ -19,7 +19,7 @@ const getMissingAuthError = function() {
 export function getWithParams(url, params, success, error) {
 	return axios.get(url, {
 		params: params
-	}, success, error);
+	}).then(success).catch(error);
 };
 
 export function get(url, success, error) {

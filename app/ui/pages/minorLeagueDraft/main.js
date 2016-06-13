@@ -2,11 +2,14 @@ import React from 'react';
 import Moment from 'moment-timezone';
 import { withRouter } from 'react-router';
 import { getMinorLeagueDraft, makePick, skipPick } from 'api/minorLeagueDraft';
+import { getMinorLeaguers } from 'api/team';
+import { switchTeam } from 'api/player';
 
 import LoggedInComponent from 'ui/logged-in-component';
 import MinorLeagueDraftPickList from 'ui/pages/minorLeagueDraft/minor-league-draft-pick-list';
 import MinorLeaguePickForm from 'ui/pages/minorLeagueDraft/minor-league-pick-form';
 import MinorLeagueDraftAdmin from 'ui/pages/minorLeagueDraft/minor-league-draft-admin';
+import PlayerSearch from 'ui/player-search';
 
 import { teamId, isAdmin } from 'auth';
 
@@ -15,7 +18,9 @@ const MinorLeagueDraft = React.createClass({
 		return {
 			picks: [],
 			currentPick: undefined,
-			adminPickId: undefined
+			adminPickId: undefined,
+			minorLeaguers: [],
+			selectedMinorLeaguer: undefined
 		}
 	},
 	componentWillMount: function() {
@@ -25,10 +30,37 @@ const MinorLeagueDraft = React.createClass({
 		}, function(error) {
 			console.log(error);
 		});
+		getMinorLeaguers(teamId(), function(response) {
+			self.setState( { minorLeaguers : response.data.data });
+		}, function(error) {
+			console.log(error);
+		});
 	},
 	resetDraft: function(newDraft) {
 		console.log(newDraft);
 		this.setState( { picks : newDraft.picks, currentPick : newDraft.currentPick } );
+	},
+	selectedMinorLeaguer: function(player) {
+		this.setState( { selectedMinorLeaguer : player });
+	},
+	dropMinorLeaguer: function() {
+		if (this.state.selectedMinorLeaguer) {
+			confirm("Are you sure you wish to drop " + this.state.selectedMinorLeaguer.name + "?");
+			var self = this;
+			switchTeam(this.state.selectedMinorLeaguer, 0, function(response) {
+				alert("Drop Successful");
+				var newMinorLeaguers = [];
+				self.state.minorLeaguers.forEach(function(minorLeaguer) {
+					if (minorLeaguer.id != self.state.selectedMinorLeaguer.id) {
+						newMinorLeaguers.push(minorLeaguer);
+					}
+				});
+				self.setState( { selectedMinorLeaguer: undefined, minorLeaguers : newMinorLeaguers });
+			}, function(error) {
+				alert("There was an issue with your request.");
+				console.log(error);
+			});
+		}
 	},
 	onPickResponse: function(response) {
 		alert(response.data.message);
@@ -36,14 +68,16 @@ const MinorLeagueDraft = React.createClass({
 		if (data != null) {
 			this.setState({ currentPick: data.nextPick });
 			var newPicksArray = [];
+			var newMinorLeaguer = undefined;
 			this.state.picks.forEach(function(pick) {
 				if (pick.id == data.id) {
 					newPicksArray.push(data);
+					newMinorLeaguer = data.playerView;
 				} else {
 					newPicksArray.push(pick);
 				}
 			});
-			this.setState({ picks : newPicksArray });
+			this.setState({ picks : newPicksArray, minorLeaguers : this.state.minorLeaguers.concat(newMinorLeaguer) });
 		}
 	},
 	onPickSubmit: function(pick) {
@@ -79,7 +113,7 @@ const MinorLeagueDraft = React.createClass({
 				{
 					this.state.currentPick ? 
 					<div className="row">
-						<div className="col-md-12">
+						<div className="col-md-6">
 							<h2>On the Clock: {this.state.currentPick.owningTeam.name}</h2>
 							<h3>{"Deadline: "}
 									{
@@ -88,6 +122,15 @@ const MinorLeagueDraft = React.createClass({
 										"Coming Soon"
 									}
 							</h3>
+						</div>
+						<div className="col-md-6">
+							<h3>My Minor Leaguers</h3>
+							<PlayerSearch
+								players={this.state.minorLeaguers}
+								value={this.state.selectedMinorLeaguer}
+								onChange={this.selectedMinorLeaguer}
+							/>
+							<input type="submit" value="DROP MINOR LEAGUER" onClick={this.dropMinorLeaguer} />
 						</div>
 					</div>
 					:
