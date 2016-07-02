@@ -55,7 +55,7 @@ const MinorLeaguePickForm = React.createClass({
 			return;
 		}
 		pick.playerView = playerView;
-		pick.deadlineUTC = undefined;
+		pick.deadlineUtc = undefined;
 		this.props.onPickSubmit(pick);
 	},
 	render: function() {
