@@ -117,8 +117,8 @@ const MinorLeagueDraft = React.createClass({
 							<h2>On the Clock: {this.state.currentPick.owningTeam.name}</h2>
 							<h3>{"Deadline: "}
 									{
-										this.state.currentPick.deadlineUtc != null ? 
-										Moment(this.state.currentPick.deadlineUtc.millis).calendar() :
+										this.state.currentPick.deadlineUTC != null ? 
+										Moment(this.state.currentPick.deadlineUTC.millis).calendar() :
 										"Coming Soon"
 									}
 							</h3>
@@ -138,8 +138,8 @@ const MinorLeagueDraft = React.createClass({
 				}
 				{
 					this.state.currentPick && this.state.currentPick.owningTeamId == teamId() 
-					&& this.state.currentPick.deadlineUtc != null ?
-					<MinorLeaguePickForm pick={this.state.currentPick} onPickSubmit={this.onPickSubmit} /> :
+					&& this.state.currentPick.deadlineUTC != null ?
+					<MinorLeaguePickForm pick={this.state.currentPick} onPickSubmit={this.onPickSubmit} onPickSkip={this.onPickSkip}/> :
 					null
 				}
 				<MinorLeagueDraftPickList currentPick={this.state.currentPick} picks={this.state.picks} onClick={this.onPickClick}/>

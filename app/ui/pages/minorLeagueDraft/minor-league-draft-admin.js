@@ -11,7 +11,7 @@ const MinorLeagueDraftAdmin = React.createClass({
 			undoPick: false,
     		reschedulePick: false,
     		assignPlayerToPick: false,
-			deadlineUtc: undefined,
+			deadlineUTC: undefined,
 			skipPick: false,
 			stopSkipper: false,
 			swapPicks: false,
@@ -42,8 +42,8 @@ const MinorLeagueDraftAdmin = React.createClass({
 		if (this.state.undoPick) {
 			return "Undoing pick " + this.props.pickId;
 		} else if (this.state.reschedulePick) {
-			var timeText = this.state.deadlineUtc != undefined ?
-					Moment(Number(this.state.deadlineUtc)).calendar() :
+			var timeText = this.state.deadlineUTC != undefined ?
+					Moment(Number(this.state.deadlineUTC)).calendar() :
 					"some as-yet-unknown time";
 			return "Rescheduling pick " + this.props.pickId + " for " + timeText;
 		} else if (this.state.assignPlayerToPick) {
@@ -62,8 +62,8 @@ const MinorLeagueDraftAdmin = React.createClass({
 		var self = this;
 		var options = $.extend({}, this.state);
 		options.pickId = this.props.pickId;
-		if (options.deadlineUtc) {
-			options.deadlineUtc = { millis : options.deadlineUtc };
+		if (options.deadlineUTC) {
+			options.deadlineUTC = { millis : options.deadlineUTC };
 		}
 		adminDraft(options, function(response) {
 			alert(response.data.message);
@@ -134,7 +134,7 @@ const MinorLeagueDraftAdmin = React.createClass({
 					<div className="row">
 						<div className="col-md-12">
 							<KeyValueInput title="Player Id" type="number" keyName="playerId" onChange={this.onChange} />
-							<KeyValueInput title="New Date In Millis" type="number" keyName="deadlineUtc" onChange={this.onChange} />
+							<KeyValueInput title="New Date In Millis" type="number" keyName="deadlineUTC" onChange={this.onChange} />
 							<KeyValueInput title="Pick 1 to Swap" type="number" keyName="pickId1" onChange={this.onChange} />
 							<KeyValueInput title="Pick 2 to Swap" type="number" keyName="pickId2" onChange={this.onChange} />
 						</div>
