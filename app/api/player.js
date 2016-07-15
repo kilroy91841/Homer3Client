@@ -1,5 +1,9 @@
 import { get, put, post } from 'api/axios';
 
+export function getPlayer(id, success, error) {
+	return get('/api/player/' + id, success, error);
+};
+
 export function getPlayers(success, error) {
 	return get('/api/player', success, error);
 };

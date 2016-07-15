@@ -78,10 +78,9 @@ const Profile = React.createClass({
 										}
 									}
 							        type="text" 
-							        min="3"
 							        onBlur={() => this.setState({ editingTeam : false })} 
 							        value={this.state.newTeamName}
-							        onChange={(e) => e.target.value.length >3 ? this.setState({ newTeamName: e.target.value }) : null }/>:
+							        onChange={(e) => this.setState({ newTeamName: e.target.value })}/>:
 								<span onClick={() => {this.setState({ editingTeam : true })}}>{this.state.newTeamName}</span>
 							}
 						</div>

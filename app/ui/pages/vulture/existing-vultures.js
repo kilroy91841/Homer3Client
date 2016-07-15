@@ -21,7 +21,7 @@ const VultureRows = React.createClass({
 								{vulture.dropPlayer.name}
 							</div>
 							<div className="col-md-3">
-								{Moment(vulture.expirationDateUTC.millis).calendar()}
+								{Moment(vulture.deadlineUTC.millis).calendar()}
 							</div>
 						</div>
 					)
@@ -51,7 +51,7 @@ const ExistingVultures = React.createClass({
 								<i>Dropping Player</i>
 							</div>
 							<div className="col-md-3">
-								<i>Expiration Time</i>
+								<i>Deadline</i>
 							</div>
 						</div>
 						<VultureRows data={this.props.data} />
