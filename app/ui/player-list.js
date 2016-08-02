@@ -4,7 +4,7 @@ import PlayerRow from 'ui/player-row';
 import List from 'ui/component/list';
 
 const defaultVultureColumnSize = 2;
-const defaultNameColumnSize = 7;
+const defaultNameColumnSize = 6;
 
 const VultureColumn = React.createClass({
 	render: function() {
@@ -46,7 +46,10 @@ export default React.createClass({
 							<div className={"col-md-" + vultureColumnSize}/> : 
 							null
 					}
-					<div className="col-md-3 text-right">
+					<div className="col-md-2 text-right">
+						<i>Keeper Season</i>
+					</div>
+					<div className="col-md-2 text-right">
 						<i>Salary</i>
 					</div>
 				</div>
@@ -69,7 +72,10 @@ export default React.createClass({
 											/> : 
 											null
 									}
-									<div className="col-md-3 text-right">
+									<div className="col-md-2 text-right">
+										{player.currentSeason.keeperSeason}
+									</div>
+									<div className="col-md-2 text-right">
 										{player.currentSeason.salary}
 									</div>
 								</PlayerRow>
