@@ -1,8 +1,6 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 
-import { isAdmin } from 'auth';
-
 import VulturePanel from 'ui/vulture-panel';
 import SalaryPanel from 'ui/salary-panel';
 import StandingsWidget from 'ui/pages/home/standingsWidget';
@@ -23,16 +21,11 @@ const Home = React.createClass({
 							<SalaryPanel/>
 						</div>
 					</div>
-					{
-						isAdmin() ?
-						<div className="row">
-							<div className="col-md-6">
-								<StandingsWidget />
-							</div>
+					<div className="row">
+						<div className="col-md-6">
+							<StandingsWidget />
 						</div>
-						:
-						null
-					}
+					</div>
 				</div>
 			</div>
 		);

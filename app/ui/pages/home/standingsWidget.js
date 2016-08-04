@@ -14,10 +14,10 @@ const StandingsWidget = React.createClass({
 	componentDidMount: function() {
 		var hourOffset = 32;
 		var me = this;
-		getStandings(Moment().tz('America/New_York').subtract(hourOffset, 'hour').format("YYYY-MM-DD"), function(success) {
-			var newStandings = success.data.data;
-			getStandings(Moment().tz('America/New_York').subtract(hourOffset + 24, 'hour').format("YYYY-MM-DD"), function(success) {
-				var oldStandings = success.data.data;
+		getStandings(Moment().tz('America/New_York').subtract(hourOffset + 24, 'hour').format("YYYY-MM-DD"), function(success) {
+			var oldStandings = success.data.data;
+			getStandings(Moment().tz('America/New_York').subtract(hourOffset, 'hour').format("YYYY-MM-DD"), function(success) {
+				var newStandings = success.data.data;
 				var standingsByTeam = {};
 				newStandings.map(function(ns1) {
 					oldStandings.map(function(ns2) {
@@ -39,7 +39,6 @@ const StandingsWidget = React.createClass({
 					standingsDiffs.push({ category: 'SV', diff: standingsPair.newStandings.savePoints - standingsPair.oldStandings.savePoints, oldPlace: standingsPair.oldStandings.savePoints, newPlace: standingsPair.newStandings.savePoints });
 					standingsDiffs.push({ category: 'ERA', diff: standingsPair.newStandings.eraPoints - standingsPair.oldStandings.eraPoints, oldPlace: standingsPair.oldStandings.eraPoints, newPlace: standingsPair.newStandings.eraPoints });
 					standingsDiffs.push({ category: 'WHIP', diff: standingsPair.newStandings.whipPoints - standingsPair.oldStandings.whipPoints, oldPlace: standingsPair.oldStandings.whipPoints, newPlace: standingsPair.newStandings.whipPoints });
-
 					var lastUpdated = Moment(standingsPair.newStandings.date.millis).tz('America/New_York').format("dddd, MMMM Do");
 					me.setState({ standingsDiffs: standingsDiffs, lastUpdated: lastUpdated });
 				}
@@ -64,25 +63,25 @@ const StandingsWidget = React.createClass({
 					this.state.standingsDiffs.map(function(standingDiff) {
 						return (
 							<div key={standingDiff.category} className="row text-center">
-								<div className="col-md-4 text-danger" >
+								<div className="col-md-5 text-danger" >
 									{
 										standingDiff.diff < 0 ?
 										<div>
 											<span className="h4">{standingDiff.diff}</span>
-											<span> ({standingDiff.oldPlace} points)</span>
+											<span> ({standingDiff.oldPlace} => {standingDiff.newPlace} points)</span>
 										</div>
 										: null
 									}
 								</div>
-								<div className="col-md-4">
+								<div className="col-md-2">
 									<span className="h4">{standingDiff.category}</span>
 								</div>
-								<div className="col-md-4 text-success" >
+								<div className="col-md-5 text-success" >
 									{
 										standingDiff.diff > 0 ?
 										<div>
 											<span className="h4">{standingDiff.diff}</span>
-											<span> ({standingDiff.oldPlace} points)</span>
+											<span> ({standingDiff.oldPlace} => {standingDiff.newPlace} points)</span>
 										</div>
 										: null
 									}
