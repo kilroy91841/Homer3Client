@@ -24,7 +24,6 @@ const App = React.createClass({
         var _this = this;
         hasAccess(token(), function(response) {
             if (!response.data.data) {
-                debugger;
                 removeUser();
             }
         }, function(err) {
@@ -39,9 +38,14 @@ const App = React.createClass({
             console.error(err);
         });
         getPlayers(function(response) {
+            var playerMap = {};
+            response.data.map(function(player) { 
+               var playerObj = {};
+               playerMap[player.id] = player;
+            });
             store.dispatch({
-                type: 'GET_PLAYERS',
-                players: response.data
+                type: 'GET_PLAYER_MAP',
+                playerMap: playerMap
             });
         }, function(err) {
             console.error(err);

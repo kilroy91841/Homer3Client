@@ -3,8 +3,10 @@ import { connect } from 'react-redux';
 import Select from 'react-select';
 
 const stateToProps = function(state) {
+	var keys = Object.keys(state.reducer.playerMap);
+	var values = keys.map(function(v) { return state.reducer.playerMap[v]; });
     return {
-        allPlayers: state.reducer.players
+        allPlayers: values
     }
 };
 

@@ -2,6 +2,7 @@ import React from 'react';
 
 import PlayerSearch from 'ui/player-search';
 import PositionSelect from 'ui/position-select';
+import Store from 'store';
 
 import { updatePlayer } from 'api/player';
 
@@ -64,6 +65,10 @@ const UpdatePlayer = React.createClass({
 
 		updatePlayer(playerToUpdate, function(response) {
 			alert(response.data.message);
+			Store.dispatch({
+	            type: 'PUT_PLAYER_IN_MAP',
+	            player: response.data.data
+	        });
 		}, function(error) {
 			alert(error.data.message);
 		});

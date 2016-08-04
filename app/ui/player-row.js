@@ -11,7 +11,7 @@ export default React.createClass({
 		
 		Store.dispatch({
             type: 'DISPLAY_PLAYER',
-            player: this.props.player
+            playerId: this.props.player.id
         });
 	},
 
