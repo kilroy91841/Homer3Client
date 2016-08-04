@@ -39,7 +39,10 @@ const StandingsWidget = React.createClass({
 					standingsDiffs.push({ category: 'SV', diff: standingsPair.newStandings.savePoints - standingsPair.oldStandings.savePoints, oldPlace: standingsPair.oldStandings.savePoints, newPlace: standingsPair.newStandings.savePoints });
 					standingsDiffs.push({ category: 'ERA', diff: standingsPair.newStandings.eraPoints - standingsPair.oldStandings.eraPoints, oldPlace: standingsPair.oldStandings.eraPoints, newPlace: standingsPair.newStandings.eraPoints });
 					standingsDiffs.push({ category: 'WHIP', diff: standingsPair.newStandings.whipPoints - standingsPair.oldStandings.whipPoints, oldPlace: standingsPair.oldStandings.whipPoints, newPlace: standingsPair.newStandings.whipPoints });
-					var lastUpdated = Moment(standingsPair.newStandings.date.millis).tz('America/New_York').format("dddd, MMMM Do");
+					var lastUpdated = Moment(
+						standingsPair.newStandings.date.yearOfEra + "-" + 
+						standingsPair.newStandings.date.monthOfYear + "-" + 
+						standingsPair.newStandings.date.dayOfMonth).format("dddd, MMMM Do");
 					me.setState({ standingsDiffs: standingsDiffs, lastUpdated: lastUpdated });
 				}
 			}, function(error) {
