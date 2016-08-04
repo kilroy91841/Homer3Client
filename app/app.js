@@ -9,7 +9,7 @@ import App from 'layouts/app';
 
 // UI
 import Team from 'ui/team';
-import Home from 'ui/home';
+import Home from 'ui/pages/home/main';
 import Admin from 'ui/admin/admin';
 import Trade from 'ui/admin/trade/trade';
 import Login from 'ui/login';
