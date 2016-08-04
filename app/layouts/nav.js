@@ -25,7 +25,7 @@ export default React.createClass({
 		if (player) {
 			store.dispatch({
 	            type: 'DISPLAY_PLAYER',
-	            player: player
+	            playerId: player.id
 	        });
     	}
 	},

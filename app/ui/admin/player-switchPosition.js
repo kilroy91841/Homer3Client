@@ -1,4 +1,5 @@
 import React from 'react';
+import Store from 'store';
 
 import { switchPosition } from 'api/player';
 
@@ -16,6 +17,10 @@ const PlayerSwitchPosition = React.createClass({
 	doPositionChange: function() {
 		switchPosition(this.state.player, this.state.position, function(response) {
 			alert(response.data.message);
+			Store.dispatch({
+	            type: 'PUT_PLAYER_IN_MAP',
+	            player: response.data.data
+	        });
 		}, function(error) {
 			alert(error.data.message);
 		});

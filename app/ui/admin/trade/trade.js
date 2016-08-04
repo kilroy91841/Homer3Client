@@ -8,8 +8,7 @@ import { acceptTrade } from 'api/trade';
 
 const stateToProps = function(state) {
     return {
-        teams: state.reducer.teams,
-        players: state.reducer.players
+        teams: state.reducer.teams
     }
 };
 

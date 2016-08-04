@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Store from 'store';
 
 import { switchTeam } from 'api/player';
 
@@ -30,6 +31,10 @@ const PlayerSwitchTeam = React.createClass({
 	doTeamChange: function() {
 		switchTeam(this.state.player, this.state.team.id, function(response) {
 			alert(response.data.message);
+			Store.dispatch({
+	            type: 'PUT_PLAYER_IN_MAP',
+	            player: response.data.data
+	        });
 		}, function(error) {
 			alert(error.data.message);
 		});

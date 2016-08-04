@@ -1,6 +1,7 @@
 import React from 'react';
 import Select from 'react-select';
 import { connect } from 'react-redux';
+import Store from 'store';
 
 import { createPlayer } from 'api/player';
 import PositionSelect from 'ui/position-select';
@@ -30,6 +31,10 @@ const CreatePlayer = React.createClass({
 	createPlayer: function() {
 		createPlayer(this.state, function(response) {
 			alert(response.data.message);
+			Store.dispatch({
+	            type: 'PUT_PLAYER_IN_MAP',
+	            player: response.data.data
+	        });
 		}, function(error) {
 			alert(error.data.message);
 		});

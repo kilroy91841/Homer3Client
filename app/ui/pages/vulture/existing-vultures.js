@@ -2,23 +2,34 @@ import React from 'react';
 import Moment from 'moment-timezone';
 
 import List from 'ui/component/list';
+import TeamLink from 'ui/team-link';
+import PlayerRow from 'ui/player-row';
 
 const VultureRows = React.createClass({
 	render: function() {
+		var me = this;
 		return (
 			<div>
 			{
 				this.props.data.map(function(vulture) {
 					return (
 						<div key={vulture.player.id} className="row hoverDiv">
-							<div className="col-md-3">
-								{vulture.player.name}
+							<div className="col-md-3 clickable">
+								<PlayerRow player={vulture.player}>
+									<div className="col-md-12">
+										{vulture.player.name}
+									</div>
+								</PlayerRow> 
 							</div>
 							<div className="col-md-3">
-								{vulture.vultureTeam.name}
+								<TeamLink team={vulture.vultureTeam} />
 							</div>
-							<div className="col-md-3">
-								{vulture.dropPlayer.name}
+							<div className="col-md-3 clickable">
+								<PlayerRow player={vulture.dropPlayer}>
+									<div className="col-md-12">
+										{vulture.dropPlayer.name}
+									</div>
+								</PlayerRow> 
 							</div>
 							<div className="col-md-3">
 								{Moment(vulture.deadlineUTC.millis).calendar()}
