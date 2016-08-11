@@ -3,10 +3,12 @@ import React from 'react';
 import List from 'ui/component/list';
 import Row from 'ui/component/row';
 
+import DraftDollarRow from 'ui/draft-dollar-row';
+
 const FinancesRow = React.createClass({
 	render: function() {
 		return (
-			<Row clickable="false">
+			<DraftDollarRow draftDollarId={this.props.data.id}>
 				<div className="col-md-2">
 					{this.props.data.season}
 				</div>
@@ -16,7 +18,7 @@ const FinancesRow = React.createClass({
 				<div className="col-md-2">
 					{this.props.data.amount}
 				</div>
-			</Row>
+			</DraftDollarRow>
 		)
 	}
 });
