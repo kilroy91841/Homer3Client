@@ -1,6 +1,8 @@
 var initialState = {
     player: {},
+    draftDollar: {},
     teams: [],
+    teamMap: {},
     playerMap: {},
     metadata: {},
     progressBar: {
@@ -18,10 +20,22 @@ export default function(state = initialState, action) {
         case 'DISPLAY_PLAYER':
             var newState = Object.assign({}, state);
             newState.player = state.playerMap[action.playerId];
+
+            newState.draftDollar = {};
+            return newState;
+        case 'DISPLAY_DRAFT_DOLLAR':
+            var newState = Object.assign({}, state);
+            newState.draftDollar = action.draftDollar;
+
+            newState.player = {};
             return newState;
         case 'GET_TEAMS':
         	var newState = Object.assign({}, state);
             newState.teams = action.teams;
+            newState.teamMap = {};
+            action.teams.map(function(team) {
+                newState.teamMap[team.id] = team;
+            });
             return newState;
         case 'PROGRESS_BAR':
             var newState = Object.assign({}, state);
