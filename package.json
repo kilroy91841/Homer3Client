@@ -30,6 +30,6 @@
     "webpack-stream": "^3.1.0",
     "moment-timezone": "^0.5.4",
     "json-loader": "*",
-    "react-d3-basic":"^1.6.0"
+    "react-d3-tooltip":"^1.4.14"
   }
 }
