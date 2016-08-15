@@ -17,7 +17,7 @@ import Vulture from 'ui/pages/vulture/main';
 import MinorLeagueDraft from 'ui/pages/minorLeagueDraft/main';
 import FreeAgentAuction from 'ui/pages/freeAgentAuction/main';
 import Profile from 'ui/pages/profile/main';
-import Standings from 'ui/standings';
+import Standings from 'ui/pages/standings/main';
 
 ReactDOM.render((
 	<Provider store={store}>
