@@ -17,6 +17,7 @@ import Vulture from 'ui/pages/vulture/main';
 import MinorLeagueDraft from 'ui/pages/minorLeagueDraft/main';
 import FreeAgentAuction from 'ui/pages/freeAgentAuction/main';
 import Profile from 'ui/pages/profile/main';
+import Standings from 'ui/pages/standings/main';
 
 ReactDOM.render((
 	<Provider store={store}>
@@ -31,6 +32,7 @@ ReactDOM.render((
 	        	<Route path="/profile" component={Profile} />
 	        	<Route path="/admin" component={Admin} />
 	        	<Route path="/admin/trade" component={Trade} />
+	        	<Route path="/standings" component={Standings} />
 	        </Route>
 	    </Router>
     </Provider>

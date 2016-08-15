@@ -47,6 +47,7 @@ export default React.createClass({
 							: null
 						}
 						<NavDropdown teams={this.props.teams}/>
+						<NavLink changeTab={this.changeTab} active={ this.state.activeTab == "Standings"} to="/standings" text="Standings"/>
 						{
 							loggedIn ?
 							<NavLink changeTab={this.changeTab} active={ this.state.activeTab == "Vulture"} to="/vulture" text="Vulture"/>

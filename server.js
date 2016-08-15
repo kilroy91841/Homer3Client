@@ -33,6 +33,9 @@ app.use('/profile', function(req, res) {
 app.use('/freeAgentAuction', function(req, res) {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
+app.use('/standings', function(req, res) {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
 
 app.get('/api/*', function(req, res) {
   var url = host.url + req.path.replace('/api', '');
