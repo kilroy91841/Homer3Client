@@ -18,6 +18,7 @@ import MinorLeagueDraft from 'ui/pages/minorLeagueDraft/main';
 import FreeAgentAuction from 'ui/pages/freeAgentAuction/main';
 import Profile from 'ui/pages/profile/main';
 import Standings from 'ui/pages/standings/main';
+import Keepers from 'ui/pages/keepers/main';
 
 ReactDOM.render((
 	<Provider store={store}>
@@ -33,6 +34,7 @@ ReactDOM.render((
 	        	<Route path="/admin" component={Admin} />
 	        	<Route path="/admin/trade" component={Trade} />
 	        	<Route path="/standings" component={Standings} />
+	        	<Route path="/keepers" component={Keepers} />
 	        </Route>
 	    </Router>
     </Provider>

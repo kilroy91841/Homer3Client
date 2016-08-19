@@ -16,8 +16,9 @@ export default React.createClass({
 	},
 
 	render: function() {
+		var { playerClicked, ...other } = this.props;
 		return (
-			<Row onClick={this.playerClicked}>
+			<Row {...other} onClick={this.playerClicked}>
 				{this.props.children}
 			</Row>
 		)

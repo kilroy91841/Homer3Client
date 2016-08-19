@@ -49,12 +49,23 @@ const Team = React.createClass({
 									]
 								} 
 							/>
-							<PlayerList title="Disabled List" data={
-									[
-										this.props.data.disabledList || []
-									]
-								} 
-							/>
+							{
+								this.props.data.disabledList && this.props.data.disabledList.length > 0 ?
+								<PlayerList title="Disabled List" data={
+										[
+											this.props.data.disabledList || []
+										]
+									} 
+								/>
+								:
+								null
+							}
+							{
+								this.props.data.bench && this.props.data.bench.length > 0 ?
+								<PlayerList title="Bench" data={[this.props.data.bench || [] ]} />
+								:
+								null
+							}
 							<MinorsList title="Minor Leaguers" data={this.props.data.minorLeaguers || []} />
 						</div>
 						<div className="col-md-6">

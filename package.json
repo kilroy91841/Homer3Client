@@ -31,6 +31,7 @@
     "moment-timezone": "^0.5.4",
     "json-loader": "*",
     "react-d3-tooltip":"^1.4.14",
-    "numeral":"^1.5.3"
+    "numeral":"^1.5.3",
+    "react-bootstrap-switch":"^3.4.5"
   }
 }
