@@ -4,8 +4,11 @@ const FieldUpdate = React.createClass({
 	render: function() {
 		return (
 			<div className="row">
-				<div className="col-md-6">
-					{this.props.label + ": " + this.props.oldValue}
+				<div className="col-md-2">
+					{this.props.label}
+				</div>
+				<div className="col-md-4">
+					{this.props.oldValue}
 				</div>
 				<div className="col-md-6">
 				{
