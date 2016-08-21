@@ -36,7 +36,7 @@ export default React.createClass({
 			<nav className="navbar navbar-default navbar-static-top">
 				<div className="container">
 					<div className="navbar-header">
-						<Link to="/" className="navbar-brand">Homer At The Bat</Link>
+						<Link to="/" className="navbar-brand" onClick={()=>this.changeTab("Home")}>Homer At The Bat</Link>
 					</div>
 				<div id="navbar" className="navbar-collapse collapse">
 					<ul className="nav navbar-nav">
@@ -46,23 +46,26 @@ export default React.createClass({
 							<NavLink changeTab={this.changeTab} active={ this.state.activeTab == "My Team"} to={"/team/" + teamId()} text="My Team"/>
 							: null
 						}
-						<NavDropdown teams={this.props.teams}/>
+						<NavDropdown label="Teams">
+							{ 
+								this.props.teams.map(function(team) {
+									return (
+										<NavLink key={team.id} to={"/team/" + team.id} text={team.name + " (" + team.owner1 + ")"} />
+									)
+								})
+							}
+						</NavDropdown>
+						{
+							loggedIn ?
+							<NavDropdown label="GM">
+								<NavLink changeTab={this.changeTab} active={ this.state.activeTab == "Vulture"} to="/vulture" text="Vulture"/>
+								<NavLink changeTab={this.changeTab} active={ this.state.activeTab == "Draft"} to="/minorLeagueDraft" text="Draft"/>
+								<NavLink changeTab={this.changeTab} active={ this.state.activeTab == "Auction"} to="/freeAgentAuction" text="Auction"/>
+								<NavLink changeTab={this.changeTab} active={ this.state.activeTab == "Keepers"} to="/keepers" text="Keepers"/>
+							</NavDropdown>
+							: null
+						}
 						<NavLink changeTab={this.changeTab} active={ this.state.activeTab == "Standings"} to="/standings" text="Standings"/>
-						{
-							loggedIn ?
-							<NavLink changeTab={this.changeTab} active={ this.state.activeTab == "Vulture"} to="/vulture" text="Vulture"/>
-							: null
-						}
-						{
-							loggedIn ?
-							<NavLink changeTab={this.changeTab} active={ this.state.activeTab == "Draft"} to="/minorLeagueDraft" text="Draft"/>
-							: null
-						}
-						{
-							loggedIn ?
-							<NavLink changeTab={this.changeTab} active={ this.state.activeTab == "Auction"} to="/freeAgentAuction" text="Auction"/>
-							: null
-						}
 					</ul>
 					<ul className="nav navbar-nav navbar-right">
 						{ 

@@ -46,10 +46,8 @@ const Trade = React.createClass({
 	},
 	doTrade: function() {
 		acceptTrade(this.state, function(response) {
-			debugger;
 			alert(response.data.message);
 		}, function(error) {
-			debugger;
 			alert(response.data.message);
 		});
 	},

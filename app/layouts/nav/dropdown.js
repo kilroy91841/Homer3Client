@@ -7,17 +7,11 @@ export default React.createClass({
 		return (
 			<li className="dropdown">
 				<a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-					Teams 
+					{this.props.label}
 					<span className="caret" />
 				</a>
 				<ul className="dropdown-menu">
-					{ 
-						this.props.teams.map(function(team) {
-							return (
-								<NavLink key={team.id} to={"/team/" + team.id} text={team.name + " (" + team.owner1 + ")"} />
-							)
-						})
-					}
+					{this.props.children}
 				</ul>
 			</li>
 		)
