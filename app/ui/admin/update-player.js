@@ -5,25 +5,7 @@ import PositionSelect from 'ui/position-select';
 import Store from 'store';
 
 import { updatePlayer } from 'api/player';
-
-const FieldUpdate = React.createClass({
-	render: function() {
-		return (
-			<div className="row">
-				<div className="col-md-6">
-					{this.props.oldValue}
-				</div>
-				<div className="col-md-6">
-				{
-					this.props.children ?
-					this.props.children :
-					<input type="text" value={this.props.newValue} onChange={this.props.onChange}/>
-				}
-				</div>
-			</div>
-		)
-	}
-});
+import FieldUpdate from 'ui/admin/field-update';
 
 const UpdatePlayer = React.createClass({
 	getInitialState: function() {
