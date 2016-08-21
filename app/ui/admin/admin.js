@@ -7,6 +7,7 @@ import AdminComponent from 'ui/admin-component';
 
 import CreatePlayer from 'ui/admin/createPlayer';
 import UpdatePlayer from 'ui/admin/update-player';
+import UpdatePlayerSeason from 'ui/admin/update-player-season';
 import PlayerSwitchTeam from 'ui/admin/player-switchTeam';
 import PlayerSwitchPosition from 'ui/admin/player-switchPosition';
 import PositionSelect from 'ui/position-select';
@@ -21,6 +22,7 @@ const Admin = React.createClass({
 						<PlayerSwitchPosition />
 						<CreatePlayer />
 						<UpdatePlayer />
+						<UpdatePlayerSeason />
 					</div>
 				</div>
 			</AdminComponent>

@@ -65,3 +65,16 @@ export function updatePlayer(player, success, error) {
 		error
 	);
 };
+
+export function updatePlayerSeason(playerSeason, success, error) {
+	var url = "/player/season";
+	return post(
+		'/api', 
+		{
+			url: url,
+			data: playerSeason
+		},
+		success,
+		error
+	);	
+};
