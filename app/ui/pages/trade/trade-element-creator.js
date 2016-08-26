@@ -1,9 +1,9 @@
 import React from 'react';
 import Select from 'react-select';
 import { getFullTeam } from 'api/team';
-import { getTradeElementText } from 'ui/admin/trade/tradeHelper';
 
 import PlayerSearch from 'ui/player-search';
+import TradeElement from 'ui/pages/trade/trade-element';
 
 export default React.createClass({
 	getInitialState: function() {
@@ -19,7 +19,14 @@ export default React.createClass({
 		}
 	}, 
 	teamFromChange: function(team) {
-		this.setState({teamFrom: team});
+		var teamTo;
+		this.props.filteredTeams.forEach(function(fTeam) {
+			if (fTeam.id != team.id) {
+				teamTo = fTeam;
+			}
+		});
+		this.setState({teamFrom: team, teamTo: teamTo });
+		this.clearState();
 
 		var self = this;
 		getFullTeam(team.id, function(response) {
@@ -34,13 +41,20 @@ export default React.createClass({
 		this.setState({teamTo: team});
 	},
 	playerChange: function(player) {
-		this.setState({ player: player, minorLeaguePick: null, draftDollar: null, swapTrade: null, draftDollarAmount: null });
+		this.clearState();
+		this.setState({ player: player });
 	},
 	pickChange: function(pick) {
-		this.setState({ minorLeaguePick: pick, player: null, draftDollar: null, swapTrade: null, draftDollarAmount: null });
+		this.clearState();
+		this.setState({ minorLeaguePick: pick});
 	},
 	draftDollarChange: function(draftDollar) {
-		this.setState({ draftDollar: draftDollar, minorLeaguePick: null, player: null, swapTrade: null, draftDollarAmount: null });
+		this.clearState();
+		this.setState({ draftDollar: draftDollar });
+	},
+	clearState: function() {
+		$(this.refs.draftDollarInput).val(undefined);
+		this.setState({ draftDollar: null, minorLeaguePick: null, player: null, swapTrade: null, draftDollarAmount: null });
 	},
 	swapChange: function(e) {
 		this.setState({ swapTrade: e.target.checked ? "true" : null });
@@ -49,13 +63,20 @@ export default React.createClass({
 		this.setState({ draftDollarAmount: e.target.value });
 	},
 	addElement: function() {
+		if (this.state.draftDollar != null && this.state.draftDollarAmount == null) {
+			alert("You must select a draft dollar amount");
+			return;
+		}
 		this.props.addElement({
-			teamFrom: this.state.teamFrom,
-			teamTo: this.state.teamTo,
+			teamFromId: this.state.teamFrom.id,
+			teamToId: this.state.teamTo.id,
 			player: this.state.player,
+			playerId: this.state.player ? this.state.player.id : null,
 			minorLeaguePick: this.state.minorLeaguePick,
+			minorLeaguePickId: this.state.minorLeaguePick ? this.state.minorLeaguePick.id : null,
 			swapTrade: this.state.swapTrade,
 			draftDollar: this.state.draftDollar,
+			draftDollarId: this.state.draftDollar ? this.state.draftDollar.id : null,
 			draftDollarAmount: this.state.draftDollarAmount
 		});
 	},
@@ -65,7 +86,7 @@ export default React.createClass({
 				<div className="col-md-12">
 					<div className="row">
 						<div className="col-md-12">
-							Add new trade element
+							<span className="h4">Add new trade element</span>
 						</div>
 					</div>
 					<div className="row">
@@ -87,15 +108,7 @@ export default React.createClass({
 							To
 						</div>
 						<div className="col-md-4">
-							<Select 
-								name="team-to-select"
-								options={this.props.filteredTeams}
-								labelKey={"name"}
-								valueKey={"id"}
-								value={this.state.teamTo}
-								onChange={this.teamToChange}
-								scrollMenuIntoView={false}
-							/>
+							{this.state.teamTo ? this.state.teamTo.name : null}
 						</div>
 					</div>
 					<div className="row">
@@ -147,7 +160,8 @@ export default React.createClass({
 										onChange={this.draftDollarChange}
 										scrollMenuIntoView={false}
 									/>
-									<input 	type="number" 
+									<input 	ref="draftDollarInput"
+											type="number" 
 											min="0" 
 											max={this.state.draftDollar ? this.state.draftDollar.amount : 0}
 											onChange={this.amountChange}
@@ -157,11 +171,6 @@ export default React.createClass({
 									}
 								</div>
 							</div>
-						</div>
-					</div>
-					<div className="row">
-						<div className="col-md-12">
-							TRADING: {getTradeElementText(this.state)} {this.state.teamFrom ? "from " + this.state.teamFrom.name : ""} {this.state.teamTo ? " to " + this.state.teamTo.name : ""}
 						</div>
 					</div>
 					<div className="row">

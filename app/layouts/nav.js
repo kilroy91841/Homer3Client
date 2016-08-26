@@ -32,6 +32,7 @@ export default React.createClass({
 	render: function() {
 		const loggedIn = isLoggedIn();
 		const admin = isAdmin();
+		var self = this;
 		return (
 			<nav className="navbar navbar-default navbar-static-top">
 				<div className="container">
@@ -50,7 +51,9 @@ export default React.createClass({
 							{ 
 								this.props.teams.map(function(team) {
 									return (
-										<NavLink key={team.id} to={"/team/" + team.id} text={team.name + " (" + team.owner1 + ")"} />
+										<NavLink changeTab={self.changeTab} 
+											active={ self.state.activeTab == team.name + " (" + team.owner1 + ")"}
+											key={team.id} to={"/team/" + team.id} text={team.name + " (" + team.owner1 + ")"} />
 									)
 								})
 							}
@@ -62,6 +65,7 @@ export default React.createClass({
 								<NavLink changeTab={this.changeTab} active={ this.state.activeTab == "Draft"} to="/minorLeagueDraft" text="Draft"/>
 								<NavLink changeTab={this.changeTab} active={ this.state.activeTab == "Auction"} to="/freeAgentAuction" text="Auction"/>
 								<NavLink changeTab={this.changeTab} active={ this.state.activeTab == "Keepers"} to="/keepers" text="Keepers"/>
+								<NavLink changeTab={this.changeTab} active={ this.state.activeTab == "Trade"} to="/trade" text="Trade"/>
 							</NavDropdown>
 							: null
 						}

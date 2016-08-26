@@ -68,7 +68,7 @@ const App = React.createClass({
         return (
             <div>
                 <Nav teams={this.props.teams}/>
-                <div className="container" >
+                <div className="container" style={{paddingBottom:"20px"}}>
                     <ProgressBar percent={this.props.progressBar.percent}/>
                     <div className="row">
                         <div className="col-md-9">

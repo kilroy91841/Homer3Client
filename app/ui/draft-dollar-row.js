@@ -13,6 +13,7 @@ export default React.createClass({
 	            draftDollar: response.data.data
 	        });	
 		}, function(error) {
+			debugger;
 			alert(error.data.message);
 		});
 		

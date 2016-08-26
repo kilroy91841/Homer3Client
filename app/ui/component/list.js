@@ -8,7 +8,7 @@ export default React.createClass({
 					this.props.hideTitle ? <div/> :
 					<div className="row">
 						<div className="col-md-12">
-							<h2>{this.props.title}</h2>
+							<h3>{this.props.title}</h3>
 						</div>
 					</div>
 				}

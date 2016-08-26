@@ -11,11 +11,11 @@ import App from 'layouts/app';
 import Team from 'ui/team';
 import Home from 'ui/pages/home/main';
 import Admin from 'ui/admin/admin';
-import Trade from 'ui/admin/trade/trade';
 import Login from 'ui/login';
 import Vulture from 'ui/pages/vulture/main';
 import MinorLeagueDraft from 'ui/pages/minorLeagueDraft/main';
 import FreeAgentAuction from 'ui/pages/freeAgentAuction/main';
+import Trade from 'ui/pages/trade/main';
 import Profile from 'ui/pages/profile/main';
 import Standings from 'ui/pages/standings/main';
 import Keepers from 'ui/pages/keepers/main';
@@ -30,9 +30,9 @@ ReactDOM.render((
 	        	<Route path="/vulture" component={Vulture} />
 	        	<Route path="/minorLeagueDraft" component={MinorLeagueDraft} />
 	        	<Route path="/freeAgentAuction" component={FreeAgentAuction} />
+	        	<Route path="/trade" component={Trade} />
 	        	<Route path="/profile" component={Profile} />
 	        	<Route path="/admin" component={Admin} />
-	        	<Route path="/admin/trade" component={Trade} />
 	        	<Route path="/standings" component={Standings} />
 	        	<Route path="/keepers" component={Keepers} />
 	        </Route>

@@ -106,7 +106,7 @@ const _DraftDollarDisplay = React.createClass({
                                                 dd.trade ? 
                                                 <div>
                                                     <span>
-                                                        {Moment(dd.trade.tradeDate.millis).format("MM/DD/YYYY")}
+                                                        {Moment(dd.trade.respondedDateUTC.millis).format("MM/DD/YYYY")}
                                                     </span>
                                                     <br/>
                                                     <span>
