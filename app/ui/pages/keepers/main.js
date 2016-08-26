@@ -10,7 +10,6 @@ import PlayerList from 'ui/player-list';
 
 import PlayerRow from 'ui/player-row';
 import KeeperRow from 'ui/pages/keepers/keeper-row';
-import Switch from 'react-bootstrap-switch';
 
 import { getNextSalary } from 'ui/pages/keepers/util';
 
