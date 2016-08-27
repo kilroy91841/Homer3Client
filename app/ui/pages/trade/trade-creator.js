@@ -17,7 +17,8 @@ const TradeCreator = React.createClass({
 		return {
 			team1: this.props.teamFrom,
 			team2: null,
-			tradeElements: []
+			tradeElements: [],
+			proposeDisabled: false
 		}
 	},
 	componentWillReceiveProps: function(nextProps) {
@@ -66,12 +67,17 @@ const TradeCreator = React.createClass({
 	},
 	proposeTrade: function() {
 		var self = this;
-		proposeTrade(this.state, function(response) {
+		this.setState({ proposeDisabled : true });
+		var trade = this.state;
+		delete trade.proposeDisabled;
+		proposeTrade(trade, function(response) {
 			alert(response.data.message);
-			debugger;
-			self.props.proposeTrade(response.data.data);
+			self.setState({ proposeDisabled : false });
+			if (response.data.data != null) {
+				self.props.proposeTrade(response.data.data);
+			}
 		}, function(error) {
-			alert(response.data.message);
+			alert(error);
 		});
 	},
 	render: function() {
@@ -190,7 +196,7 @@ const TradeCreator = React.createClass({
 										null
 									}
 									<div className="col-md-6">
-										<input type="submit" value="PROPOSE TRADE" onClick={this.proposeTrade} />
+										<input disabled={this.state.proposeDisabled ? "disabled" : null } type="submit" value="PROPOSE TRADE" onClick={this.proposeTrade} />
 									</div>
 								</div>
 							</div>
