@@ -29,9 +29,15 @@ const Home = React.createClass({
 								<VulturePanel onPlayerClick={this.onVulturePlayerClick}/>
 							</div>
 						}
-						<div className="col-md-6">
-							<SalaryPanel/>
-						</div>
+						{
+							_isOffseason
+							?
+							null
+							:
+							<div className="col-md-6">
+								<SalaryPanel/>
+							</div>
+						}
 					</div>
 					<div className="row">
 						{
