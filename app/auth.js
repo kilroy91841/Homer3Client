@@ -37,3 +37,7 @@ export function isAdmin() {
 export function removeUser() {
 	return localStorage.removeItem('user');
 }
+
+export function isOffseason() {
+	return true;
+}

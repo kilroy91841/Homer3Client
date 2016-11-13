@@ -97,7 +97,6 @@ const Keepers = React.createClass({
 		delete keepers.minorLeaguers[playerId];
 		delete keepers.majorLeaguers[playerId];
 		var availableSalary = this.state.availableSalary;
-		debugger;
 		if (selected) {
 			if (isMinorLeaguer) {
 				keepers.minorLeaguers[playerId] = keeper;
