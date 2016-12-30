@@ -79,14 +79,29 @@ const _PlayerDisplay = React.createClass({
 });
 
 const _DraftDollarDisplay = React.createClass({
+    getPlace: function(place) {
+        if (place == 1) {
+            return "1st";
+        } else if (place == 2) {
+            return "2nd";
+        } else if (place == 3) {
+            return "3rd";
+        } else {
+            return place + "th";
+        }
+    },
     getDraftDollarMap: function() {
         if (this.props.draftDollar.historyDraftDollars.length > 0) {
-            var lastAmount = this.props.draftDollar.historyDraftDollars[0].amount;
+            var lastDraftDollar = this.props.draftDollar.historyDraftDollars[0];
             var _this = this;
             return this.props.draftDollar.historyDraftDollars.map(function(dd, ix) {
-                var netAmount = dd.amount - lastAmount;
+                var netAmount = dd.amount - lastDraftDollar.amount;
                 var isPositive = netAmount > 0;
-                lastAmount = dd.amount;
+                var displaySeptemberStanding = false;
+                if (!lastDraftDollar.septemberStandingId && dd.septemberStandingId) {
+                    displaySeptemberStanding = true;
+                }
+                lastDraftDollar = dd;
                 var thisTeamId = dd.team.id;
                 var otherTeamId = undefined;
                 if (dd.trade) {
@@ -103,6 +118,21 @@ const _DraftDollarDisplay = React.createClass({
                                         netAmount != 0 ? 
                                         <span style={{color: isPositive ? "green" : "red"}}>
                                             {
+                                                displaySeptemberStanding ?
+                                                <div>
+                                                    <span>
+                                                        September Standing bonus:
+                                                    </span>
+                                                    <br/>
+                                                    <span>
+                                                        {_this.getPlace(dd.septemberStanding.place) + " place"}
+                                                    </span>
+                                                    <br/>
+                                                    <span>
+                                                        {isPositive ? "+" + netAmount : netAmount}
+                                                    </span>
+                                                </div>
+                                                :
                                                 dd.trade ? 
                                                 <div>
                                                     <span>
