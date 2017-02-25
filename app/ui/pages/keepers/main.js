@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import { getKeepers, saveKeepers } from 'api/keepers';
 import { getFullTeam } from 'api/team';
-import { teamId } from 'auth';
+import { teamId, isAdmin } from 'auth';
 import PlayerList from 'ui/player-list';
 
 import PlayerRow from 'ui/player-row';
@@ -29,7 +29,10 @@ const Keepers = React.createClass({
 	},
 	componentDidMount:function() {
 		const self = this;
-		getFullTeam(teamId(), function(response) {
+		const k = teamId();
+		const a = isAdmin();
+		const theTeamId = a ? this.props.params.id : k;
+		getFullTeam(theTeamId, function(response) {
 			var allPlayers = [].concat(
 							response.data.catcher,
 							response.data.firstBase,
@@ -52,7 +55,7 @@ const Keepers = React.createClass({
 			});
 			self.setState({ allPlayers : allPlayers });
 
-			getKeepers(teamId(), function(response) {
+			getKeepers(theTeamId, function(response) {
 				var keepersList = response.data.data;
 				var keepers =  { majorLeaguers: [], minorLeaguers: [] }
 				keepersList.map(function(keeper) {
@@ -84,7 +87,10 @@ const Keepers = React.createClass({
 		Object.keys(self.state.keepers.majorLeaguers).forEach(function(playerId) {
 			keepers.push(self.state.keepers.majorLeaguers[playerId]);
 		});
-		saveKeepers(teamId(), keepers, function(response) {
+		const k = teamId();
+		const a = isAdmin();
+		const theTeamId = a ? this.props.params.id : k;
+		saveKeepers(theTeamId, keepers, function(response) {
 			alert("Keepers saved!");
 		}, function(error) {
 			console.log(errors);

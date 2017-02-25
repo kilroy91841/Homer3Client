@@ -25,7 +25,7 @@ const UpdatePlayerSeason = React.createClass({
 		this.setState({ newHasRookieStatus: e.target.value });
 	},
 	onIsMinorLeaguerChange: function(e) {
-		this.setState({ newLastName: e.target.value });
+		this.setState({ newIsMinorLeaguer: e.target.value });
 	},
 	onSubmit: function() {
 		var playerSeasonToUpdate = $.extend({}, this.state.playerSeason);

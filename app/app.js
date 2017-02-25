@@ -35,6 +35,7 @@ ReactDOM.render((
 	        	<Route path="/admin" component={Admin} />
 	        	<Route path="/standings" component={Standings} />
 	        	<Route path="/keepers" component={Keepers} />
+	        	<Route path="/keepers/:id" component={Keepers} />
 	        </Route>
 	    </Router>
     </Provider>
