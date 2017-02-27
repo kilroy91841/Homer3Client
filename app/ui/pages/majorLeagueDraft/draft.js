@@ -260,6 +260,11 @@ const MajorLeagueDraft = React.createClass({
 					var sortedPlayers = players.filter(function(player) {
 						return player.currentSeason.teamId == team.id;
 					});
+
+					const rosteredPlayers = sortedPlayers.filter(function(player) {
+						return player.currentSeason.fantasyPosition.name != "MIN";
+					}).length;
+					teamView.playersLeft = 23 - rosteredPlayers;
 					
 					self.addMissing(sortedPlayers, "C", 1, 2);
 					self.addMissing(sortedPlayers, "1B", 2, 1);
@@ -317,10 +322,6 @@ const MajorLeagueDraft = React.createClass({
 					teamView.draftDollar = draftDollars.filter(function(dd) {
 						return dd.teamId == team.id;
 					})[0];
-					const rosteredPlayers = sortedPlayers.filter(function(player) {
-						return player.currentSeason.fantasyPosition.name != "MIN";
-					}).length;
-					teamView.playersLeft = 23 - rosteredPlayers;
 					teamView.maxBid = teamView.draftDollar.amount - teamView.playersLeft + 1;
 					teams.push(teamView);
 
