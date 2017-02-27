@@ -50,6 +50,7 @@ const PlayerSwitchPosition = React.createClass({
 							<PlayerSearch
 								value={this.state.player}
 								onChange={this.onPlayerChange}
+								players={this.props.players}
 							/>
 						</div>
 						<div className="col-md-3">
@@ -65,7 +66,7 @@ const PlayerSwitchPosition = React.createClass({
 							/>
 						</div>
 						<div className="col-md-1">
-							<input type="submit" value="GO!" onClick={this.doPositionChange}/>
+							<input type="submit" value="Switch Position" onClick={this.doPositionChange}/>
 						</div>
 					</div>
 				</div>

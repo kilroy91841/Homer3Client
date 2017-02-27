@@ -62,9 +62,8 @@ export default React.createClass({
 							loggedIn ?
 							<NavDropdown label="GM">
 								<NavLink changeTab={this.changeTab} active={ this.state.activeTab == "Vulture"} to="/vulture" text="Vulture"/>
-								<NavLink changeTab={this.changeTab} active={ this.state.activeTab == "Draft"} to="/minorLeagueDraft" text="Draft"/>
+								<NavLink changeTab={this.changeTab} active={ this.state.activeTab == "Draft"} to="/majorLeagueDraft" text="Draft"/>
 								<NavLink changeTab={this.changeTab} active={ this.state.activeTab == "Auction"} to="/freeAgentAuction" text="Auction"/>
-								<NavLink changeTab={this.changeTab} active={ this.state.activeTab == "Keepers"} to="/keepers" text="Keepers"/>
 								<NavLink changeTab={this.changeTab} active={ this.state.activeTab == "Trade"} to="/trade" text="Trade"/>
 							</NavDropdown>
 							: null

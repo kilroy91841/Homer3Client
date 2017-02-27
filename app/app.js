@@ -19,6 +19,7 @@ import Trade from 'ui/pages/trade/main';
 import Profile from 'ui/pages/profile/main';
 import Standings from 'ui/pages/standings/main';
 import Keepers from 'ui/pages/keepers/main';
+import MajorLeagueDraft from 'ui/pages/majorLeagueDraft/main';
 
 ReactDOM.render((
 	<Provider store={store}>
@@ -36,6 +37,7 @@ ReactDOM.render((
 	        	<Route path="/standings" component={Standings} />
 	        	<Route path="/keepers" component={Keepers} />
 	        	<Route path="/keepers/:id" component={Keepers} />
+	        	<Route path="/majorLeagueDraft" component={MajorLeagueDraft} />
 	        </Route>
 	    </Router>
     </Provider>

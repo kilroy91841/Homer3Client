@@ -1,5 +1,5 @@
 import React from 'react';
-import { withRouter } from 'react-router';
+import { Link, withRouter } from 'react-router';
 
 import VulturePanel from 'ui/vulture-panel';
 import SalaryPanel from 'ui/salary-panel';
@@ -21,9 +21,18 @@ const Home = React.createClass({
 						{
 							_isOffseason 
 							?
-							<div className="col-md-6">
-								<DraftDollarPanel/>
-							</div> 
+							<div className="col-md-12">
+								<div className="row">
+									<div className="col-md-6">
+										<DraftDollarPanel/>
+									</div> 
+									<div className="col-md-6">
+										<h2>
+										<Link to={"/majorLeagueDraft"}>MAJOR LEAGUE DRAFT</Link>
+										</h2>
+									</div> 
+								</div>
+							</div>
 							:	
 							<div className="col-md-6">
 								<VulturePanel onPlayerClick={this.onVulturePlayerClick}/>
