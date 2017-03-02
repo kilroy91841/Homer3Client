@@ -78,6 +78,7 @@ const MajorLeagueDraftAdmin = React.createClass({
 					<div className="row">
 						<div className="col-md-3">
 							<PlayerSearch
+								players={this.props.players}
 								value={this.state.player}
 								onChange={this.onPlayerChange}
 							/>

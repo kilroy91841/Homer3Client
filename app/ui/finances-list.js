@@ -39,9 +39,7 @@ export default React.createClass({
 					</div>
 				</div>
 				{
-					this.props.data.filter(function(finance) {
-						return !finance.expired;
-					}).map(function(finance) {
+					this.props.data.map(function(finance) {
 						return <FinancesRow key={finance.id} data={finance} />
 					})
 				}

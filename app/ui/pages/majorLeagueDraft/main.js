@@ -6,8 +6,6 @@ import LoggedInComponent from 'ui/logged-in-component';
 import MajorLeagueDraftAdmin from 'ui/pages/majorLeagueDraft/admin';
 import Draft from 'ui/pages/majorLeagueDraft/draft';
 
-import { teamId, isAdmin } from 'auth';
-
 const stateToProps = function(state) {
     return {
         metadata: state.reducer.metadata
@@ -23,16 +21,11 @@ const MajorLeagueDraft = React.createClass({
 		return (
 			<LoggedInComponent>
 				<div className="row">
-						<div className="col-md-12">
-							<h1>Major League Draft</h1>
-						</div>
+					<div className="col-md-12">
+						<h1>Major League Draft</h1>
+					</div>
 				</div>
 				<Draft />
-				{
-					isAdmin() ?
-					<MajorLeagueDraftAdmin /> :
-					null
-				}
 			</LoggedInComponent>
 		);
 	}

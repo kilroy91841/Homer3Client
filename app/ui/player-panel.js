@@ -2,14 +2,18 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import TeamLink from 'ui/team-link';
+import PlayerRow from'ui/player-row';
 import Moment from 'moment-timezone';
 import store from 'store';
+import DraftHistory from 'ui/pages/majorLeagueDraft/history';
 
 const stateToProps = function(state) {
     return {
         player: state.reducer.player,
         draftDollar: state.reducer.draftDollar,
-        teamMap: state.reducer.teamMap
+        teamMap: state.reducer.teamMap,
+        playerMap: state.reducer.playerMap,
+        picks: state.reducer.picks
     }
 };
 
@@ -29,10 +33,21 @@ const DisplayRow = React.createClass({
 });
 
 const _PlayerDisplay = React.createClass({
+    close: function() {
+        store.dispatch({
+            type: 'DISPLAY_PLAYER',
+            playerId: null
+        });
+    },
 	render: function() {
         return (
             <div className="row">
             	<div className="col-md-12">
+                    <div className="row">
+                        <div className="col-md-12">
+                            <input type="button" onClick={this.close} value="Close" />
+                        </div>
+                    </div>
                     <div className="row">
                         <div className="col-md-12">
                             {
@@ -149,7 +164,16 @@ const _DraftDollarDisplay = React.createClass({
                                                         {isPositive ? "+" + netAmount : netAmount}
                                                     </span>
                                                 </div>
-                                                : null
+                                                :
+                                                dd.draftedPlayerId ?
+                                                <div>
+                                                    <span>
+                                                        Drafted&nbsp;
+                                                        {_this.props.playerMap[dd.draftedPlayerId].name}
+                                                    </span>
+                                                </div>
+                                                :
+                                                null
                                             }
                                         </span>
                                         :null
@@ -213,9 +237,11 @@ const PlayerDisplay = React.createClass({
     		return ( <_PlayerDisplay {...this.props} />)
     	} else if (this.props.draftDollar.id) {
             return ( <_DraftDollarDisplay {...this.props} />)
-        } else {
-    		return ( <div className="row" /> )
-    	}
+        } else if (this.props.picks) {
+    		return ( <DraftHistory {...this.props} /> )
+    	} else {
+            return ( <div className="row" /> )
+        }
     }
 });
 

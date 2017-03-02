@@ -1,14 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import store from 'store';
 
 import PlayerRow from 'ui/player-row';
 import TeamLink from 'ui/team-link';
 import MajorLeagueDraftAdmin from 'ui/pages/majorLeagueDraft/admin';
+import DraftHistory from 'ui/pages/majorLeagueDraft/history';
 import PlayerSearch from 'ui/player-search';
 import PlayerSwitchPosition from 'ui/admin/player-switchPosition';
-
 import { getPlayers, getDraftDollars } from 'api/majorLeagueDraft';
-
 import { teamId, isAdmin } from 'auth';
 
 const stateToProps = function(state) {
@@ -20,6 +20,13 @@ const stateToProps = function(state) {
 
 const Team = React.createClass({
 	render: function() {
+		const playersLeft = this.props.data.playersLeft > 0 ? this.props.data.playersLeft : 0;
+		var dollarsPerPick = 0;
+		if (playersLeft > 0)
+		{
+			dollarsPerPick = (this.props.data.draftDollar.amount / this.props.data.playersLeft).toPrecision(2);	
+		}
+		var maxBid = this.props.data.playersLeft ? this.props.data.maxBid : 0;
 		return (
 			<div className="row">
 				<div className="col-md-12">
@@ -33,30 +40,21 @@ const Team = React.createClass({
 							<b>{"DOLLARS LEFT: " + this.props.data.draftDollar.amount}</b>
 						</div>
 					</div>
-					{
-						this.props.data.playersLeft > 0 ?
-						<div className="row">
-							<div className="col-md-12">
-								<div className="row">
-									<div className="col-md-12">
-										<b>{"PLAYERS LEFT: " + this.props.data.playersLeft}</b>
-									</div>
-								</div>  
-								<div className="row">
-									<div className="col-md-12">
-										<b>{"MAX BID: " + this.props.data.maxBid}</b>
-									</div>
-								</div> 
-								<div className="row">
-									<div className="col-md-12">
-										<b>{"DOLLARS/PICK: " + (this.props.data.draftDollar.amount / this.props.data.playersLeft).toPrecision(2)}</b>
-									</div>
-								</div>
-							</div>
+					<div className="row">
+						<div className="col-md-12">
+							<b>{"PLAYERS LEFT: " + this.props.data.playersLeft}</b>
 						</div>
-						:
-						null
-					}
+					</div>  
+					<div className="row">
+						<div className="col-md-12">
+							<b>{"MAX BID: " + maxBid}</b>
+						</div>
+					</div> 
+					<div className="row">
+						<div className="col-md-12">
+							<b>{"DOLLARS/PICK: " + dollarsPerPick}</b>
+						</div>
+					</div>
 					{
 						this.props.data.players.map(function (player) {
 							return (
@@ -69,7 +67,11 @@ const Team = React.createClass({
 								:
 								<PlayerRow key={player.id} player={player}>
 									<div className="col-md-2">
-										{player.currentSeason.fantasyPosition.name}
+										{
+											player.currentSeason.fantasyPosition ? 
+											player.currentSeason.fantasyPosition.name : 
+											null
+										}
 									</div>
 									<div className="col-md-6">
 										{player.name}
@@ -78,59 +80,6 @@ const Team = React.createClass({
 										{player.currentSeason.salary}
 									</div>
 								</PlayerRow>
-							)
-						})
-					}
-				</div>
-			</div>
-		)
-	}
-});
-
-const DraftHistory = React.createClass({
-	render: function() {
-		const self = this;
-		return (
-			<div className="row">
-				<div className="col-md-12">
-					<div className="row">
-						<div className="col-md-12">
-							<h2>PICKS</h2>
-						</div>
-					</div>
-					<div className="row">
-						<div className="col-md-1">
-							<i>#</i>
-						</div>
-						<div className="col-md-7">
-							<i>Player</i>
-						</div>
-						<div className="col-md-2">
-							<i>Team</i>
-						</div>
-						<div className="col-md-2">
-							<i>Amount</i>
-						</div>
-					</div>
-					{
-						this.props.picks.map(function(pick, ix) {
-							return (
-								<div className="row" key={pick.id}>
-									<div className="col-md-1">
-										<b>{ix + 1 + "."}</b>
-									</div>
-									<div className="col-md-7">
-										<PlayerRow player={pick.playerView}>
-											{pick.playerView.name}
-										</PlayerRow>
-									</div>
-									<div className="col-md-2">
-										<TeamLink team={self.props.teamMap[pick.teamId]} />
-									</div>
-									<div className="col-md-2">
-										{pick.amount}
-									</div>
-								</div>
 							)
 						})
 					}
@@ -197,15 +146,35 @@ const DraftPlayerSearch = React.createClass({
 				<div className="col-md-12">
 					<div className="row">
 						<div className="col-md-6 col-md-offset-4">
-							<label><input type="checkbox" value="C" onClick={()=>self.toggleFilterPosition("C")}/>C</label>
-							<label><input type="checkbox" value="1B" onClick={()=>self.toggleFilterPosition("1B")}/>1B</label>
-							<label><input type="checkbox" value="2B" onClick={()=>self.toggleFilterPosition("2B")}/>2B</label>
-							<label><input type="checkbox" value="3B" onClick={()=>self.toggleFilterPosition("3B")}/>3B</label>
-							<label><input type="checkbox" value="SS" onClick={()=>self.toggleFilterPosition("SS")}/>SS</label>
-							<label><input type="checkbox" value="OF" onClick={()=>self.toggleFilterPosition("OF")}/>OF</label>
-							<label><input type="checkbox" value="DH" onClick={()=>self.toggleFilterPosition("DH")}/>DH</label>
-							<label><input type="checkbox" value="P" onClick={()=>self.toggleFilterPosition("P")}/>P</label>
-							<label><input type="checkbox" value="RP" onClick={()=>self.toggleFilterPosition("RP")}/>RP</label>
+							<div className="row">
+								<div className="col-md-1">
+									<label><input type="checkbox" value="C" onClick={()=>self.toggleFilterPosition("C")}/>C</label>
+								</div>
+								<div className="col-md-1">
+									<label><input type="checkbox" value="1B" onClick={()=>self.toggleFilterPosition("1B")}/>1B</label>
+								</div>
+								<div className="col-md-1">
+									<label><input type="checkbox" value="2B" onClick={()=>self.toggleFilterPosition("2B")}/>2B</label>
+								</div>
+								<div className="col-md-1">
+									<label><input type="checkbox" value="3B" onClick={()=>self.toggleFilterPosition("3B")}/>3B</label>
+								</div>
+								<div className="col-md-1">
+									<label><input type="checkbox" value="SS" onClick={()=>self.toggleFilterPosition("SS")}/>SS</label>
+								</div>
+								<div className="col-md-1">
+									<label><input type="checkbox" value="OF" onClick={()=>self.toggleFilterPosition("OF")}/>OF</label>
+								</div>
+								<div className="col-md-1">
+									<label><input type="checkbox" value="DH" onClick={()=>self.toggleFilterPosition("DH")}/>DH</label>
+								</div>
+								<div className="col-md-1">
+									<label><input type="checkbox" value="P" onClick={()=>self.toggleFilterPosition("P")}/>P</label>
+								</div>
+								<div className="col-md-1">
+									<label><input type="checkbox" value="RP" onClick={()=>self.toggleFilterPosition("RP")}/>RP</label>
+								</div>
+							</div>
 						</div>
 					</div>
 					<div className="row">
@@ -238,10 +207,10 @@ const MajorLeagueDraft = React.createClass({
 		}
 	},
 	addMissing: function(players, position, sort, needed) {
-		const missingCount = players.filter(function(p) {
-			return p.currentSeason.fantasyPosition.name == position;
+		const existingCount = players.filter(function(p) {
+			return p.currentSeason.fantasyPosition && p.currentSeason.fantasyPosition.name == position;
 		}).length;
-		const toAdd = needed - missingCount;
+		const toAdd = needed - existingCount;
 		if (toAdd > 0)
 		{
 			for (var i = 0; i < toAdd; i++)
@@ -263,6 +232,10 @@ const MajorLeagueDraft = React.createClass({
 				currentPlayer : data.data.data.currentPlayer,
 				picks: data.data.data.picks 
 			});
+			store.dispatch({
+				type: 'DISPLAY_DRAFT_HISTORY',
+	        	picks: data.data.data.picks
+	    	});
 			const players = data.data.data.players;
 			getDraftDollars(function(data) {
 				const draftDollars = data.data.data;
@@ -276,7 +249,7 @@ const MajorLeagueDraft = React.createClass({
 					});
 
 					const rosteredPlayers = sortedPlayers.filter(function(player) {
-						return player.currentSeason.fantasyPosition.name != "MIN";
+						return !player.currentSeason.fantasyPosition || player.currentSeason.fantasyPosition.name != "MIN";
 					}).length;
 					teamView.playersLeft = 23 - rosteredPlayers;
 					
@@ -292,7 +265,13 @@ const MajorLeagueDraft = React.createClass({
 					self.addMissing(sortedPlayers, "P", 10, 9);
 					
 					sortedPlayers.sort(function(a, b) {
-						if (a.currentSeason.fantasyPosition.sort < b.currentSeason.fantasyPosition.sort)
+						if (!a.currentSeason.fantasyPosition && b.currentSeason.fantasyPosition)
+						{
+							return 1;
+						} else if (a.currentSeason.fantasyPosition && !b.currentSeason.fantasyPosition)
+						{
+							return -1;
+						} else if (a.currentSeason.fantasyPosition.sort < b.currentSeason.fantasyPosition.sort)
 						{
 							return -1;
 						}
@@ -365,21 +344,26 @@ const MajorLeagueDraft = React.createClass({
 		return (
 			<div className="row">
 				<div className="col-md-12">
+					{
+						isAdmin() ?
+						<MajorLeagueDraftAdmin players={this.state.freeAgents}/> :
+						null
+					}
 					<div className="row">
 						<div className="col-md-6">
 							<h3>Current Player</h3>
 						</div>
 						<div className="col-md-6">
+							<h3>
 							<PlayerRow player={this.state.currentPlayer}>
 								{this.state.currentPlayer ? this.state.currentPlayer.name : ""}
 							</PlayerRow>
+							</h3>
 						</div>
 					</div>
-					<DraftPlayerSearch
-						players={this.state.freeAgents}
-					/>
+					<DraftPlayerSearch players={this.state.freeAgents} />
 					<div className="row">
-						<div className="col-md-12">
+						<div className="col-md-8">
 							<PlayerSwitchPosition players={this.state.teamPlayers.filter(function(player) {
 								return player && player.name;
 							})}/>

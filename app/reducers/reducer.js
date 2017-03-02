@@ -36,6 +36,11 @@ export default function(state = initialState, action) {
 
             newState.player = {};
             return newState;
+        case 'DISPLAY_DRAFT_HISTORY':
+            var newState = Object.assign({}, state);
+            newState.picks = action.picks;
+
+            return newState;
         case 'GET_TEAMS':
         	var newState = Object.assign({}, state);
             newState.teams = action.teams;
