@@ -5,7 +5,7 @@ import PlayerRow from 'ui/player-row';
 import TeamLink from 'ui/team-link';
 import MajorLeagueDraftAdmin from 'ui/pages/majorLeagueDraft/admin';
 import PlayerSearch from 'ui/player-search';
-import PlayerChangePosition from 'ui/admin/player-switchPosition';
+import PlayerSwitchPosition from 'ui/admin/player-switchPosition';
 
 import { getPlayers, getDraftDollars } from 'api/majorLeagueDraft';
 
@@ -23,9 +23,9 @@ const Team = React.createClass({
 		return (
 			<div className="row">
 				<div className="col-md-12">
-					<div className="row">
+					<div className="row" onClick={()=>console.log(this.props.data)}>
 						<div className="col-md-12">
-							<TeamLink team={this.props.data.team} />
+							<h3><TeamLink team={this.props.data.team} /></h3>
 						</div>
 					</div>
 					<div className="row">
@@ -33,16 +33,30 @@ const Team = React.createClass({
 							<b>{"DOLLARS LEFT: " + this.props.data.draftDollar.amount}</b>
 						</div>
 					</div>
-					<div className="row">
-						<div className="col-md-12">
-							<b>{"PLAYERS LEFT: " + this.props.data.playersLeft}</b>
+					{
+						this.props.data.playersLeft > 0 ?
+						<div className="row">
+							<div className="col-md-12">
+								<div className="row">
+									<div className="col-md-12">
+										<b>{"PLAYERS LEFT: " + this.props.data.playersLeft}</b>
+									</div>
+								</div>  
+								<div className="row">
+									<div className="col-md-12">
+										<b>{"MAX BID: " + this.props.data.maxBid}</b>
+									</div>
+								</div> 
+								<div className="row">
+									<div className="col-md-12">
+										<b>{"DOLLARS/PICK: " + (this.props.data.draftDollar.amount / this.props.data.playersLeft).toPrecision(2)}</b>
+									</div>
+								</div>
+							</div>
 						</div>
-					</div>  
-					<div className="row">
-						<div className="col-md-12">
-							<b>{"MAX BID: " + this.props.data.maxBid}</b>
-						</div>
-					</div>  
+						:
+						null
+					}
 					{
 						this.props.data.players.map(function (player) {
 							return (
@@ -366,7 +380,9 @@ const MajorLeagueDraft = React.createClass({
 					/>
 					<div className="row">
 						<div className="col-md-12">
-							<PlayerChangePosition players={this.state.teamPlayers}/>
+							<PlayerSwitchPosition players={this.state.teamPlayers.filter(function(player) {
+								return player && player.name;
+							})}/>
 						</div>
 					</div>
 					<div className="row">

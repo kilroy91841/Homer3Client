@@ -19,7 +19,14 @@ export default function(state = initialState, action) {
             return newState;
         case 'DISPLAY_PLAYER':
             var newState = Object.assign({}, state);
-            newState.player = state.playerMap[action.playerId];
+            if (action.playerId)
+            {
+                newState.player = state.playerMap[action.playerId];
+            }
+            else
+            {
+                newState.player = {};
+            }
 
             newState.draftDollar = {};
             return newState;

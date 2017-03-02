@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import TeamLink from 'ui/team-link';
 import Moment from 'moment-timezone';
+import store from 'store';
 
 const stateToProps = function(state) {
     return {
@@ -169,10 +170,21 @@ const _DraftDollarDisplay = React.createClass({
             return null;
         }
     },
+    close: function() {
+        store.dispatch({
+            type: 'DISPLAY_DRAFT_DOLLAR',
+            draftDollar: {}
+        });
+    },
     render: function() {
         return (
             <div className="row">
                 <div className="col-md-12">
+                    <div className="row">
+                        <div className="col-md-12">
+                            <input type="button" onClick={this.close} value="Close" />
+                        </div>
+                    </div>
                     <div className="row">
                         <div className="col-md-12">
                             <h3>{this.props.draftDollar.text}</h3>

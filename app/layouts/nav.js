@@ -11,7 +11,8 @@ import { isLoggedIn, teamId, removeUser, isAdmin } from 'auth';
 export default React.createClass({
 	getInitialState: function() {
 		return {
-			activeTab : "Home"
+			activeTab : "Home",
+			player: null
 		}
 	},
 	changeTab: function(clickedTabName) {
@@ -22,12 +23,12 @@ export default React.createClass({
 		removeUser();
 	},
 	onPlayerClick: function(player) {
-		if (player) {
-			store.dispatch({
-	            type: 'DISPLAY_PLAYER',
-	            playerId: player.id
-	        });
-    	}
+		this.setState({ player: player });
+		const playerId = player ? player.id : null;
+		store.dispatch({
+			type: 'DISPLAY_PLAYER',
+	        playerId: playerId
+	    });
 	},
 	render: function() {
 		const loggedIn = isLoggedIn();
@@ -91,7 +92,7 @@ export default React.createClass({
 							<NavLink changeTab={this.changeTab} active={ this.state.activeTab == "Login"} to="/login" text="Login"/>
 						}
 						<li className="navbar-right" style={{ paddingTop:"7px"}}>
-							<PlayerSearch classProp={"navbar-right"} onChange={this.onPlayerClick}/>
+							<PlayerSearch classProp={"navbar-right"} onChange={this.onPlayerClick} value={this.state.player}/>
 						</li>
 					</ul>
 				</div>
