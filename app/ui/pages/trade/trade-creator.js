@@ -4,7 +4,7 @@ import Select from 'react-select';
 import TradeElement from 'ui/pages/trade/trade-element';
 import TradeElementCreator from 'ui/pages/trade/trade-element-creator';
 
-import { proposeTrade } from 'api/trade';
+import { proposeTrade, forceTrade } from 'api/trade';
 
 const stateToProps = function(state) {
     return {
@@ -76,6 +76,18 @@ const TradeCreator = React.createClass({
 			if (response.data.data != null) {
 				self.props.proposeTrade(response.data.data);
 			}
+		}, function(error) {
+			alert(error);
+		});
+	},
+	forceTrade: function() {
+		var self = this;
+		this.setState({ proposeDisabled : true });
+		var trade = this.state;
+		delete trade.proposeDisabled;
+		forceTrade(trade, function(response) {
+			alert(response.data.message);
+			self.setState({ proposeDisabled : false });
 		}, function(error) {
 			alert(error);
 		});

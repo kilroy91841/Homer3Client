@@ -8,6 +8,14 @@ export function proposeTrade(trade, success, error) {
 	}, success, error);
 };
 
+export function forceTrade(trade, success, error) {
+	var url = "/trade/admin/force";
+	return post('/api', {
+		url: url,
+		data: trade
+	}, success, error);
+};
+
 export function getTrades(teamId, success, error) {
 	get("/api/trade/team/" + teamId, success, error);
 };
