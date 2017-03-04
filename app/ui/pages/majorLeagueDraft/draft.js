@@ -203,7 +203,8 @@ const MajorLeagueDraft = React.createClass({
 			teams: [],
 			currentPlayer: {},
 			teamPlayers: [],
-			picks: []
+			picks: [],
+			isDraftLive: false
 		}
 	},
 	addMissing: function(players, position, sort, needed) {
@@ -232,10 +233,13 @@ const MajorLeagueDraft = React.createClass({
 				currentPlayer : data.data.data.currentPlayer,
 				picks: data.data.data.picks 
 			});
-			store.dispatch({
-				type: 'DISPLAY_DRAFT_HISTORY',
-	        	picks: data.data.data.picks
-	    	});
+			if (self.state.isDraftLive)
+			{
+				store.dispatch({
+					type: 'DISPLAY_DRAFT_HISTORY',
+		        	picks: data.data.data.picks
+		    	});
+			}
 			const players = data.data.data.players;
 			getDraftDollars(function(data) {
 				const draftDollars = data.data.data;
@@ -339,30 +343,39 @@ const MajorLeagueDraft = React.createClass({
 			<div className="row">
 				<div className="col-md-12">
 					{
-						isAdmin() ?
+						isAdmin() && this.state.isDraftLive ?
 						<MajorLeagueDraftAdmin players={this.state.freeAgents}/> :
 						null
 					}
-					<div className="row">
-						<div className="col-md-6">
-							<h3>Current Player</h3>
+					{
+						this.state.isDraftLive ? 
+						<div className="row">
+							<div className="col-md-12">
+								<div className="row">
+									<div className="col-md-6">
+										<h3>Current Player</h3>
+									</div>
+									<div className="col-md-6">
+										<h3>
+										<PlayerRow player={this.state.currentPlayer}>
+											{this.state.currentPlayer ? this.state.currentPlayer.name : ""}
+										</PlayerRow>
+										</h3>
+									</div>
+								</div>
+								<DraftPlayerSearch players={this.state.freeAgents} />
+								<div className="row">
+									<div className="col-md-8">
+										<PlayerSwitchPosition players={this.state.teamPlayers.filter(function(player) {
+											return player && player.name;
+										})}/>
+									</div>
+								</div>
+							</div>
 						</div>
-						<div className="col-md-6">
-							<h3>
-							<PlayerRow player={this.state.currentPlayer}>
-								{this.state.currentPlayer ? this.state.currentPlayer.name : ""}
-							</PlayerRow>
-							</h3>
-						</div>
-					</div>
-					<DraftPlayerSearch players={this.state.freeAgents} />
-					<div className="row">
-						<div className="col-md-8">
-							<PlayerSwitchPosition players={this.state.teamPlayers.filter(function(player) {
-								return player && player.name;
-							})}/>
-						</div>
-					</div>
+						:
+						null
+					}
 					<div className="row">
 					{
 						this.state.teams.map(function (team, ix) {

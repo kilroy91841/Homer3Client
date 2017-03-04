@@ -10,7 +10,7 @@ import { token, removeUser } from 'auth';
 
 //UI
 import Nav from 'layouts/nav';
-import PlayerPanel from 'ui/player-panel';
+import PlayerPanel from 'ui/sidePanel/player/panel';
 
 const stateToProps = function(state) {
     return {

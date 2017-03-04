@@ -26,7 +26,7 @@ const StandingsWidget = React.createClass({
 						}
 					});
 				});
-				if (teamId()) {
+				if (teamId() && standingsByTeam[teamId()]) {
 					var standingsPair = standingsByTeam[teamId()]
 					var standingsDiffs = [];
 					standingsDiffs.push({ category: 'R', diff: standingsPair.newStandings.runPoints - standingsPair.oldStandings.runPoints, oldPlace: standingsPair.oldStandings.runPoints, newPlace: standingsPair.newStandings.runPoints });
