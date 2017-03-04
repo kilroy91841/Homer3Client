@@ -338,7 +338,7 @@ const MajorLeagueDraft = React.createClass({
 		var self = this;
 		setInterval(function() { 
 			self.getData();
-		}.bind(this), 10000);
+		}.bind(this), 30000);
 	},
 	render: function() {
 		return (
