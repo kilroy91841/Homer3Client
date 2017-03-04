@@ -23,7 +23,7 @@ const Team = React.createClass({
 					</div>
 					<div className="row">
 						<div className="col-md-12">
-                    		Salary: {this.props.data.salary} / 400 
+                    		Salary: {this.props.data.salary} / 350 
 	                    	<a style={{'paddingLeft':'10px'}} target="_blank" href={"http://games.espn.go.com/flb/clubhouse?leagueId=216011&teamId=" + this.props.data.id + "&seasonId=2016"}>ESPN</a>
                     	</div>
 					</div>
