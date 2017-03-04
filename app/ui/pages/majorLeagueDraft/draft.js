@@ -334,12 +334,6 @@ const MajorLeagueDraft = React.createClass({
 	componentWillMount: function() {
 		this.getData()
 	},
-	componentDidMount: function() {
-		var self = this;
-		setInterval(function() { 
-			self.getData();
-		}.bind(this), 30000);
-	},
 	render: function() {
 		return (
 			<div className="row">
