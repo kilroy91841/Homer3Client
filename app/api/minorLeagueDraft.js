@@ -1,7 +1,14 @@
 import { get, post } from 'api/axios';
 
-export function getMinorLeagueDraft(success, error) {
-	return get('/api/minorLeagueDraft', success, error);
+export function getMinorLeagueDraft(season, success, error) {
+	if (season)
+	{
+		return get('/api/minorLeagueDraft?season=' + season, success, error);
+	}
+	else
+	{
+		return get('/api/minorLeagueDraft', success, error);
+	}			
 };
 
 export function makePick(pick, success, error) {

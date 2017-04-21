@@ -30,6 +30,7 @@ ReactDOM.render((
 	        	<Route path="/team/:id" component={Team} />
 	        	<Route path="/vulture" component={Vulture} />
 	        	<Route path="/minorLeagueDraft" component={MinorLeagueDraft} />
+	        	<Route path="/minorLeagueDraft/:season" component={MinorLeagueDraft} />
 	        	<Route path="/freeAgentAuction" component={FreeAgentAuction} />
 	        	<Route path="/trade" component={Trade} />
 	        	<Route path="/profile" component={Profile} />

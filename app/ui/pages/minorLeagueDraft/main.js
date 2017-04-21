@@ -1,6 +1,6 @@
 import React from 'react';
 import Moment from 'moment-timezone';
-import { withRouter } from 'react-router';
+import { withRouter, Link } from 'react-router';
 import { getMinorLeagueDraft, makePick, skipPick } from 'api/minorLeagueDraft';
 import { getMinorLeaguers } from 'api/team';
 import { switchTeam } from 'api/player';
@@ -20,18 +20,26 @@ const MinorLeagueDraft = React.createClass({
 			currentPick: undefined,
 			adminPickId: undefined,
 			minorLeaguers: [],
-			selectedMinorLeaguer: undefined
+			selectedMinorLeaguer: undefined,
+			season: 2017
 		}
 	},
 	componentWillMount: function() {
+		this.getDraft(this.state.season);
 		const self = this;
-		getMinorLeagueDraft(function(response) {
-			self.setState( { picks : response.data.data.picks, currentPick : response.data.data.currentPick } );
+		getMinorLeaguers(teamId(), function(response) {
+			self.setState( { minorLeaguers : response.data.data });
 		}, function(error) {
 			console.log(error);
 		});
-		getMinorLeaguers(teamId(), function(response) {
-			self.setState( { minorLeaguers : response.data.data });
+	},
+	getDraft: function(season) {
+		const self = this;
+		getMinorLeagueDraft(season, function(response) {
+			self.setState( { 
+				season: season,
+				picks : response.data.data.picks, 
+				currentPick : response.data.data.currentPick } );
 		}, function(error) {
 			console.log(error);
 		});
@@ -104,6 +112,14 @@ const MinorLeagueDraft = React.createClass({
 						<div className="col-md-12">
 							<h1>Minor League Draft</h1>
 						</div>
+				</div>
+				<div className="row">
+					<div className="col-md-1">
+						<h3 className="clickable" onClick={()=>this.getDraft(2016)}>2016</h3>
+					</div>
+					<div className="col-md-1">
+						<h3 className="clickable" onClick={()=>this.getDraft(2017)}>2017</h3>
+					</div>
 				</div>
 				{
 					isAdmin() ?
