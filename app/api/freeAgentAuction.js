@@ -44,5 +44,5 @@ export function bid(view, success, error) {
 };
 
 export function getFreeAgentAuctionDollar(teamId, success, error) {
-	return get('/api/draftDollar/' + teamId, success, error);
+	return get('/api/draftDollar/freeAgentAuction/' + teamId, success, error);
 };
