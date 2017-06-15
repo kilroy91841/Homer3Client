@@ -2,3 +2,4 @@ node_modules
 bundle.js
 bundle.map
 npm-debug.log
+.vscode

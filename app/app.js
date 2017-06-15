@@ -18,6 +18,7 @@ import FreeAgentAuction from 'ui/pages/freeAgentAuction/main';
 import Trade from 'ui/pages/trade/main';
 import Profile from 'ui/pages/profile/main';
 import Standings from 'ui/pages/standings/main';
+import Players from 'ui/pages/players/main';
 import Keepers from 'ui/pages/keepers/main';
 import MajorLeagueDraft from 'ui/pages/majorLeagueDraft/main';
 
@@ -36,6 +37,7 @@ ReactDOM.render((
 	        	<Route path="/profile" component={Profile} />
 	        	<Route path="/admin" component={Admin} />
 	        	<Route path="/standings" component={Standings} />
+				<Route path="/players" component={Players} />
 	        	<Route path="/keepers" component={Keepers} />
 	        	<Route path="/keepers/:id" component={Keepers} />
 	        	<Route path="/majorLeagueDraft" component={MajorLeagueDraft} />

@@ -36,6 +36,9 @@ app.use('/freeAgentAuction', function(req, res) {
 app.use('/standings', function(req, res) {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
+app.use('/players', function(req, res) {
+  res.sendFile(path.join(__dirname, 'index.html'));
+});
 app.use('/keepers', function(req, res) {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
