@@ -4,6 +4,8 @@ import PlayerRow from 'ui/player-row';
 import Row from 'ui/component/row';
 import TeamLink from 'ui/team-link';
 
+import { teamId } from 'auth';
+
 const MinorLeagueDraftPickList = React.createClass({
 	isCurrentPick: function(pick) {
 		return this.props.currentPick && this.props.currentPick.id == pick.id;
@@ -29,7 +31,21 @@ const MinorLeagueDraftPickList = React.createClass({
 					</div>
 					{
 						this.props.picks.map(function(pick) {
-							var style = self.isCurrentPick(pick) ? { background: "yellow" } : {};
+							var isCurPick = self.isCurrentPick(pick);
+							var isTeamPick = teamId() == pick.owningTeam.id;
+							var style;
+							if (isCurPick)
+							{
+								style = { background: "yellow" };
+							}
+							else if (isTeamPick)
+							{
+								style = { background: "lightblue" };
+							}
+							else
+							{
+								style = {};
+							}
 							return (
 								<Row key={pick.id} style={style} onClick={() => self.props.onClick(pick.id)}>
 									<div className="col-md-1">
