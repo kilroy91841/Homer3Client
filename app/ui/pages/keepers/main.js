@@ -31,7 +31,8 @@ const Keepers = React.createClass({
 		const self = this;
 		const k = teamId();
 		const a = isAdmin();
-		const theTeamId = (a ? this.props.params.id : k) ? a : k;
+		const someTeamId = a ? this.props.params.id : k;
+		const theTeamId = someTeamId ? someTeamId : k;
 		getFullTeam(theTeamId, function(response) {
 			var allPlayers = [].concat(
 							response.data.catcher,
