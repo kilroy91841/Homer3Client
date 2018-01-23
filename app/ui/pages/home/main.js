@@ -26,11 +26,16 @@ const Home = React.createClass({
 									<div className="col-md-6">
 										<DraftDollarPanel/>
 									</div> 
-									<div className="col-md-6">
-										<h2>
-										<Link to={"/majorLeagueDraft"}>MAJOR LEAGUE DRAFT</Link>
-										</h2>
-									</div> 
+									{
+										false ?
+										<div className="col-md-6">
+											<h2>
+											<Link to={"/majorLeagueDraft"}>MAJOR LEAGUE DRAFT</Link>
+											</h2>
+										</div> 
+										:
+										null
+									}
 								</div>
 							</div>
 							:	

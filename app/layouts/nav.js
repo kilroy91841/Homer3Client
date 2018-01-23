@@ -6,7 +6,7 @@ import NavLink from 'layouts/nav/link';
 import PlayerSearch from 'ui/player-search';
 import store from 'store';
 
-import { isLoggedIn, teamId, removeUser, isAdmin } from 'auth';
+import { isLoggedIn, teamId, removeUser, isAdmin, isOffseason } from 'auth';
 
 export default React.createClass({
 	getInitialState: function() {
@@ -33,6 +33,7 @@ export default React.createClass({
 	render: function() {
 		const loggedIn = isLoggedIn();
 		const admin = isAdmin();
+		const offseason = isOffseason();
 		var self = this;
 		return (
 			<nav className="navbar navbar-default navbar-static-top">
@@ -62,11 +63,12 @@ export default React.createClass({
 						{
 							loggedIn ?
 							<NavDropdown label="GM">
-								<NavLink changeTab={this.changeTab} active={ this.state.activeTab == "Vulture"} to="/vulture" text="Vulture"/>
+								{ offseason ? <NavLink changeTab={this.changeTab} active={ this.state.activeTab == "Keepers"} to="/keepers" text="Keepers"/> : null }
+								{ offseason ? null : <NavLink changeTab={this.changeTab} active={ this.state.activeTab == "Vulture"} to="/vulture" text="Vulture"/> }
 								<NavLink changeTab={this.changeTab} active={ this.state.activeTab == "Minor League Draft"} to="/minorLeagueDraft" text="Minor League Draft"/>
-								<NavLink changeTab={this.changeTab} active={ this.state.activeTab == "Auction"} to="/freeAgentAuction" text="Auction"/>
+								{ offseason ? null : <NavLink changeTab={this.changeTab} active={ this.state.activeTab == "Auction"} to="/freeAgentAuction" text="Auction"/> }
 								<NavLink changeTab={this.changeTab} active={ this.state.activeTab == "Trade"} to="/trade" text="Trade"/>
-								<NavLink changeTab={this.changeTab} active={ this.state.activeTab == "Major League Draft"} to="/majorLeagueDraft" text="Major League Draft"/>
+								{ offseason ? null : <NavLink changeTab={this.changeTab} active={ this.state.activeTab == "Major League Draft"} to="/majorLeagueDraft" text="Major League Draft"/> }
 							</NavDropdown>
 							: null
 						}

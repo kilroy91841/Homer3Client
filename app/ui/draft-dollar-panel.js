@@ -45,7 +45,7 @@ const DraftDollarPanel = React.createClass({
 				<div className="col-md-12">
 					<div className="row">
 						<div className="col-md-12">
-							<h2>2017 MLB Draft Dollars</h2>
+							<h2>2018 MLB Draft Dollars</h2>
 						</div>
 					</div>
 					<div className="row">
