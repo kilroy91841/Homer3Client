@@ -90,7 +90,8 @@ const Keepers = React.createClass({
 		});
 		const k = teamId();
 		const a = isAdmin();
-		const theTeamId = a ? this.props.params.id : k;
+		const someTeamId = a ? this.props.params.id : k;
+		const theTeamId = someTeamId ? someTeamId : k;
 		saveKeepers(theTeamId, keepers, function(response) {
 			alert("Keepers saved!");
 		}, function(error) {
