@@ -20,6 +20,7 @@
     "gulp": "^3.9.0",
     "gulp-cli": "^2.0.1",
     "json-loader": "*",
+    "lodash":"^4.17.5",
     "moment-timezone": "^0.5.4",
     "numeral": "^1.5.3",
     "react": "^0.14.3",
