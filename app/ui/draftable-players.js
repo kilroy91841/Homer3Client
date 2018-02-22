@@ -8,9 +8,10 @@ import _ from 'lodash';
 const stateToProps = function(state) {
 	var keys = Object.keys(state.reducer.playerMap);
 	var values = keys.map(function(v) { return state.reducer.playerMap[v]; });
-	var filtered = _.filter(values, function(p) { return p.currentSeason.keeperSeason == 3; })
+	var filtered = _.filter(values, function(p) { return p.currentSeason.keeperSeason == 3 || !p.currentSeason.teamId; });
+	var sorted = _.sortBy(filtered, function(p) { return p.lastName; });
     return {
-        allPlayers: filtered
+        allPlayers: sorted
     }
 };
 
