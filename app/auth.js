@@ -39,5 +39,5 @@ export function removeUser() {
 }
 
 export function isOffseason() {
-	return true;
+	return false;
 }
