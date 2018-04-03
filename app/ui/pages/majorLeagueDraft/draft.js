@@ -253,7 +253,7 @@ const MajorLeagueDraft = React.createClass({
 					});
 
 					const rosteredPlayers = sortedPlayers.filter(function(player) {
-						return !player.currentSeason.fantasyPosition || player.currentSeason.fantasyPosition.name != "MIN" || player.currentSeason.fantasyPosition.name != "DL";
+						return !player.currentSeason.fantasyPosition || (player.currentSeason.fantasyPosition.name != "MIN" && player.currentSeason.fantasyPosition.name != "DL");
 					}).length;
 					teamView.playersLeft = 23 - rosteredPlayers;
 					
