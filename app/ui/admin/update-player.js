@@ -14,7 +14,8 @@ const UpdatePlayer = React.createClass({
 			newFirstName: undefined,
 			newLastName: undefined,
 			newMlbPlayerId: undefined,
-			newPosition: undefined
+			newPosition: undefined,
+			newEspnName: undefined
 		};
 	},
 	onPlayerChange: function(p) {
@@ -23,7 +24,8 @@ const UpdatePlayer = React.createClass({
 			newFirstName : p.firstName, 
 			newLastName : p.lastName,
 			newMlbPlayerId : p.mlbPlayerId,
-			newPosition : p.position
+			newPosition : p.position,
+			newEspnName: p.espnName
 		});
 	},
 	onFirstNameChange: function(e) {
@@ -38,12 +40,16 @@ const UpdatePlayer = React.createClass({
 	onPositionChange: function(position) {
 		this.setState({ newPosition : position });
 	},
+	onEspnNameChange: function(e) {
+		this.setState({ newEspnName: e.target.value });
+	},
 	onSubmit: function() {
 		var playerToUpdate = $.extend({}, this.state.player);
 		playerToUpdate.firstName = this.state.newFirstName;
 		playerToUpdate.lastName = this.state.newLastName;
 		playerToUpdate.mlbPlayerId = this.state.newMlbPlayerId;
 		playerToUpdate.position = this.state.newPosition;
+		playerToUpdate.espnName = this.state.newEspnName;
 
 		updatePlayer(playerToUpdate, function(response) {
 			alert(response.data.message);
@@ -83,6 +89,10 @@ const UpdatePlayer = React.createClass({
 								oldValue={this.state.player.lastName} 
 								newValue={this.state.newLastName} 
 								onChange={this.onLastNameChange} />
+							<FieldUpdate 
+								oldValue={this.state.player.espnName} 
+								newValue={this.state.newEspnName} 
+								onChange={this.onEspnNameChange} />
 							<FieldUpdate oldValue={this.state.player.mlbPlayerId}>	
 								<input type="number" value={this.state.newMlbPlayerId} onChange={this.onMlbPlayerIdChange} />
 							</FieldUpdate>

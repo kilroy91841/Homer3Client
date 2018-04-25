@@ -1,12 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Store from 'store';
+import ReactTable from "react-table";
 
-import Table from 'ui/pages/players/table';
 import PositionMultiSelect from 'ui/position-multiselect';
 
 const stateToProps = function(state) {
     return {
-        playerMap: state.reducer.playerMap
+        playerMap: state.reducer.playerMap,
+        teamMap: state.reducer.teamMap
     }
 };
 
@@ -24,34 +26,63 @@ const PlayersPage = React.createClass({
         }
         return players;
     },
+    getTeamName: function(teamId) {
+    	if (teamId)
+    	{
+    		return this.props.teamMap[teamId].name;
+    	}
+    	else
+    	{
+    		return "-";
+    	}
+    },
+    playerClicked: function(id) {
+		Store.dispatch({
+            type: 'DISPLAY_PLAYER',
+            playerId: id
+        });
+	},
 	render: function() {
+		const _this = this;
 		return (
 			<div className="row">
 				<div className="col-md-12">
-					<div className="row">
-						<div className="col-md-12">
-							<h2>Players</h2>
-						</div>
-					</div>
-                    <div className="row">
-                        <div className="col-md-4">
-                            Position Filter
-                        </div>
-                        <div className="col-md-4">
-                            <PositionMultiSelect />
-                        </div>
-                    </div>
-					<div className="row">
-						<div className="col-md-12">
-							<Table 
-								columns={[
-									{label: 'Keeper Year', dataProp: "keeperSeason", dataFunc: (p)=>p.currentSeason.keeperSeason}, 
-									{label: 'Salary', dataProp: "salary", dataFunc: (p)=>p.currentSeason.salary}
-								]} 
-								data={this.getPlayers(this.props.playerMap)} 
-							/>
-						</div>
-					</div>
+					<ReactTable data={this.getPlayers(this.props.playerMap)}
+						getTdProps={(state, rowInfo, column, instance) => {
+    						return {
+      							onClick: (e, handleOriginal) => {
+      								_this.playerClicked(rowInfo.original.id);		
+      							}
+      						}
+      					}
+      				}
+						columns=
+						{
+							[
+								{
+									Header: "Name",
+									accessor: "name"
+								},
+								{
+									Header: "Salary",
+									id: "salary",
+									accessor: p => p.currentSeason.salary,
+									defaultSortDesc: true
+								},
+								{
+									Header: "Team",
+									id: "Team",
+									accessor: p => this.getTeamName(p.currentSeason.teamId),
+									defaultSortDesc: true
+								},
+								{
+									Header: "Keeper Season",
+									id: "keeperSeason",
+									accessor: p => p.currentSeason.keeperSeason
+								}
+							]
+						}
+					/>
 				</div>
 			</div>
 		);

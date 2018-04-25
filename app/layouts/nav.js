@@ -49,6 +49,7 @@ export default React.createClass({
 							<NavLink changeTab={this.changeTab} active={ this.state.activeTab == "My Team"} to={"/team/" + teamId()} text="My Team"/>
 							: null
 						}
+						<NavLink changeTab={this.changeTab} active={ this.state.activeTab == "Players"} to="/players" text="Players"/>
 						<NavDropdown label="Teams">
 						{ 
 							this.props.teams.map(function(team) {

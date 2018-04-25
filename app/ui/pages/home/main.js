@@ -5,6 +5,7 @@ import VulturePanel from 'ui/vulture-panel';
 import SalaryPanel from 'ui/salary-panel';
 import DraftDollarPanel from 'ui/draft-dollar-panel';
 import StandingsWidget from 'ui/pages/home/standingsWidget';
+import DraftablePlayers from 'ui/draftable-players';
 
 import { isOffseason } from 'auth';
 
@@ -36,6 +37,9 @@ const Home = React.createClass({
 										:
 										null
 									}
+									<div className="col-md-6">
+										<DraftablePlayers/>
+									</div>
 								</div>
 							</div>
 							:	

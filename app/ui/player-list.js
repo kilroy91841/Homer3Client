@@ -35,9 +35,14 @@ export default React.createClass({
 		return (
 			<List title={this.props.title} hideTitle={this.props.hideTitle}>
 				<div className="row">
-					<div className="col-md-2">
-						<i>Pos</i>
-					</div>
+					{
+						self.props.hidePlayerSeason ?
+						null
+						:
+						<div className="col-md-2">
+							<i>Pos</i>
+						</div>
+					}
 					<div className={"col-md-" + nameColumnSize}>
 						<i>Name</i>
 					</div>
@@ -46,21 +51,35 @@ export default React.createClass({
 							<div className={"col-md-" + vultureColumnSize}/> : 
 							null
 					}
-					<div className="col-md-2 text-right">
-						<i>Keeper Season</i>
-					</div>
-					<div className="col-md-2 text-right">
-						<i>Salary</i>
-					</div>
+					{
+						self.props.hidePlayerSeason ?
+						null
+						:
+						<div className="col-md-4 text-right">
+							<div className="row">
+								<div className="col-md-6">
+									<i>Keeper Season</i>
+								</div>
+								<div className="col-md-6">
+									<i>Salary</i>
+								</div>
+							</div>
+						</div>
+					}
 				</div>
 				{
 					this.props.data.map(function(playerArray) {
 						return playerArray.map(function(player) {
 							return ( 
 								<PlayerRow onClick={self.props.onClick} key={player.id} player={player}>
-									<div className="col-md-2">
-										{player.currentSeason.fantasyPosition.name}
-									</div>
+									{
+										self.props.hidePlayerSeason ?
+										null
+										:
+										<div className="col-md-2">
+											{player.currentSeason.fantasyPosition.name}
+										</div>
+									}
 									<div className={"col-md-" + nameColumnSize}>
 										{player.name}
 									</div>
@@ -72,12 +91,21 @@ export default React.createClass({
 											/> : 
 											null
 									}
-									<div className="col-md-2 text-right">
-										{player.currentSeason.keeperSeason}
-									</div>
-									<div className="col-md-2 text-right">
-										{player.currentSeason.salary}
-									</div>
+									{
+										self.props.hidePlayerSeason ? 
+											null
+											:
+											<div className="col-md-4 text-right">
+												<div className="row">
+													<div className="col-md-6">
+														{player.currentSeason.keeperSeason}
+													</div>
+													<div className="col-md-6">
+														{player.currentSeason.salary}
+													</div>
+												</div>
+											</div>
+									}
 								</PlayerRow>
 							)
 						})

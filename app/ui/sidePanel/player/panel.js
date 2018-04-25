@@ -58,7 +58,9 @@ const _PlayerDisplay = React.createClass({
                         season={this.props.player.currentSeason} 
                         currentSeason={true} />
                     {
-                        this.props.player.playerSeasons.map(function(playerSeason) {
+                        this.props.player.playerSeasons.sort(function(a, b) {
+                            return a.season > b.season ? -1 : 1;
+                        }).map(function(playerSeason) {
                             if (playerSeason.season == self.props.player.currentSeason.season)
                             {
                                 return null;
