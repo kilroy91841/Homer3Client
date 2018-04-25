@@ -50,15 +50,15 @@ export default React.createClass({
 							: null
 						}
 						<NavDropdown label="Teams">
-							{ 
-								this.props.teams.map(function(team) {
-									return (
-										<NavLink changeTab={self.changeTab} 
-											active={ self.state.activeTab == team.name + " (" + team.owner1 + ")"}
-											key={team.id} to={"/team/" + team.id} text={team.name + " (" + team.owner1 + ")"} />
-									)
-								})
-							}
+						{ 
+							this.props.teams.map(function(team) {
+								return (
+									<NavLink changeTab={self.changeTab} 
+										active={ self.state.activeTab == team.name + " (" + team.owner1 + ")"}
+										key={team.id} to={"/team/" + team.id} text={team.name + " (" + team.owner1 + ")"} />
+								)
+							})
+						}
 						</NavDropdown>
 						{
 							loggedIn ?
@@ -73,7 +73,13 @@ export default React.createClass({
 							: null
 						}
 						<NavLink changeTab={this.changeTab} active={ this.state.activeTab == "Standings"} to="/standings" text="Standings"/>
+						<NavDropdown label="History">
+						{
+							<NavLink changeTab={this.changeTab} active={ this.state.activeTab == "Minor League Draft History"} to="/minorLeagueDraftHistory" text="Minor League Draft History"/>
+						}
+						</NavDropdown>
 					</ul>
+
 					<ul className="nav navbar-nav navbar-right">
 						{ 
 							loggedIn ?

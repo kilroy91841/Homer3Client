@@ -204,7 +204,7 @@ const MajorLeagueDraft = React.createClass({
 			currentPlayer: {},
 			teamPlayers: [],
 			picks: [],
-			isDraftLive: false
+			isDraftLive: true
 		}
 	},
 	addMissing: function(players, position, sort, needed) {

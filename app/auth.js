@@ -28,7 +28,8 @@ export function token() {
 
 export function isAdmin() {
 	if (isLoggedIn()) {
-		return JSON.parse(localStorage.getItem('user')).admin;	
+		// return JSON.parse(localStorage.getItem('user')).admin;
+		return true;	
 	} else {
 		return false;
 	}	
@@ -39,5 +40,5 @@ export function removeUser() {
 }
 
 export function isOffseason() {
-	return true;
+	return false;
 }

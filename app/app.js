@@ -21,6 +21,7 @@ import Standings from 'ui/pages/standings/main';
 import Players from 'ui/pages/players/main';
 import Keepers from 'ui/pages/keepers/main';
 import MajorLeagueDraft from 'ui/pages/majorLeagueDraft/main';
+import MinorLeagueDraftHistory from 'ui/pages/minorLeagueDraftHistory/main';
 
 ReactDOM.render((
 	<Provider store={store}>
@@ -41,6 +42,7 @@ ReactDOM.render((
 	        	<Route path="/keepers" component={Keepers} />
 	        	<Route path="/keepers/:id" component={Keepers} />
 	        	<Route path="/majorLeagueDraft" component={MajorLeagueDraft} />
+				<Route path="/minorLeagueDraftHistory" component={MinorLeagueDraftHistory} />
 	        </Route>
 	    </Router>
     </Provider>
