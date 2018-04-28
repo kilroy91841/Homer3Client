@@ -102,12 +102,17 @@ const FullPlayerCreator = React.createClass({
 										label="Keeper Season"
 										oldValue=""
 										newValue={this.state.playerSeason.keeperSeason}
-										onChange={e => this.onFieldChange(e, "playerSeason.season")}/>
+										onChange={e => this.onFieldChange(e, "playerSeason.keeperSeason")}/>
 									<FieldUpdate
 										label="Draft Team"
 										oldValue=""
 										newValue={this.state.playerSeason.draftTeamId}
 										onChange={e => this.onFieldChange(e, "playerSeason.draftTeamId")}/>
+									<FieldUpdate
+										label="Team"
+										oldValue=""
+										newValue={this.state.playerSeason.teamId}
+										onChange={e => this.onFieldChange(e, "playerSeason.teamId")}/>
 									<FieldUpdate
 										label="Salary"
 										oldValue=""
