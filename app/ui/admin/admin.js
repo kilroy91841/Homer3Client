@@ -12,6 +12,7 @@ import PlayerSwitchTeam from 'ui/admin/player-switchTeam';
 import PlayerSwitchPosition from 'ui/admin/player-switchPosition';
 import PositionSelect from 'ui/position-select';
 import TradeCreator from 'ui/pages/trade/trade-creator';
+import FullPlayerCreator from 'ui/admin/full-player-creator';
 
 const Admin = React.createClass({
 	render: function() {
@@ -24,6 +25,7 @@ const Admin = React.createClass({
 						<CreatePlayer />
 						<UpdatePlayer />
 						<UpdatePlayerSeason />
+						<FullPlayerCreator />
 						<TradeCreator isAdmin={true} />
 					</div>
 				</div>

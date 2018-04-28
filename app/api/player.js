@@ -78,3 +78,16 @@ export function updatePlayerSeason(playerSeason, success, error) {
 		error
 	);	
 };
+
+export function fullPlayerCreate(playerView, success, error) {
+	var url = "/player/adminCreate";
+	return post(
+		'/api',
+		{
+			url: url,
+			data: playerView
+		},
+		success,
+		error
+	);
+};
