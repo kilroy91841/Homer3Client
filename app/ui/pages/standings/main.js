@@ -5,9 +5,9 @@ import { getStandings, getStandingsBetween } from 'api/standings';
 import Table from 'ui/pages/standings/table';
 import Moment from 'moment-timezone';
 
-const firstDate = "2017-04-02";
-const lastDate = "2017-10-02";
-const septemberStart = "2017-09-01";
+const firstDate = "2018-03-29";
+const lastDate = "2018-10-01";
+const septemberStart = "2018-09-01";
 
 const stateToProps = function(state) {
     return {
