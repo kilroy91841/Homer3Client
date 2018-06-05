@@ -21,7 +21,7 @@ const MinorLeagueDraft = React.createClass({
 			adminPickId: undefined,
 			minorLeaguers: [],
 			selectedMinorLeaguer: undefined,
-			season: 2017
+			season: 2018
 		}
 	},
 	componentWillMount: function() {
